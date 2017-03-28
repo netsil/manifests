@@ -1,4 +1,5 @@
 docker run -td \
+    --name netsil_aoc \
     -v /opt/netsil/lite/ceph/conf:/etc/ceph \
     -v /opt/netsil/lite/ceph/data:/var/lib/ceph-data \
     -v /opt/netsil/lite/druid/realtime-segments:/opt/netsil/druid/realtime-segments \
