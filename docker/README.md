@@ -18,23 +18,20 @@ For your Netsil AOC instance, we recommend:
 
 
 ### Installing Netsil AOC
-* To install the AOC, run the following script
-    
-This will pull and run the Netsil AOC docker image.
+* Pull and run Netsil AOC (with `docker run` command)
 ```
 $ install-netsil.sh
 ```
 
-* You may also run Netsil AOC with docker-compose, if you prefer:
+* Pull and run Netsil AOC (with `docker-compose`)
 ```
 $ docker-compose up -d
 ```
 
-
 ### Installing Collectors
-* To install the collectors as a container, run the following script with the address of your Netsil AOC in the environment
+* Run a collector 
 
-This will pull and run the Netsil Collectors docker image.
+Remember to specify the address of your Netsil AOC instance
 ```
 NETSIL_HOST=<Your AOC address here> install-netsil-collectors.sh
 ```
