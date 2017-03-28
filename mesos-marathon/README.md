@@ -2,10 +2,6 @@
 Prerequisites
 - A running instance of Marathon, v1.1.1 or above
 
-Netsil installation can be split into two parts: **Netsil AOC** and the **collectors**.
-
-The collectors are installed on your application servers and mirror the traffic back to Netsil AOC for analysis.
-
 The installation instructions below use the dcos-cli, but you may do them through the Marathon UI as well.
 
 If you wish to do so, you may install only the collectors on your mesos cluster, and install Netsil AOC elsewhere.

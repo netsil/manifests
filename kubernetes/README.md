@@ -3,10 +3,6 @@ Prerequisites
 - Running kubernetes cluster
 - Configured kubectl
 
-Netsil installation can be split into two parts: **Netsil AOC** and the **collectors**.
-
-The collectors are installed on your application servers and mirror the traffic back to Netsil AOC for analysis.
-
 If you wish to do so, you may install only the collectors on your main kubernetes cluster, and install Netsil AOC elsewhere.
 
 
