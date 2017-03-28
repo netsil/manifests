@@ -3,12 +3,12 @@ Prerequisites
 - Docker daemon, running v1.10.0 or above
 
 ### Installing Netsil AOC
-* Pull and run Netsil AOC (with `docker run` command)
+* Pull and run Netsil AOC with `docker run` command
 ```
 $ ./install-netsil.sh
 ```
 
-* Pull and run Netsil AOC (with `docker-compose`)
+* Alternatively, you may use docker-compose
 ```
 $ docker-compose up -d
 ```
