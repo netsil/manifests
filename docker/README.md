@@ -20,7 +20,7 @@ For your Netsil AOC instance, we recommend:
 ### Installing Netsil AOC
 * Pull and run Netsil AOC (with `docker run` command)
 ```
-$ install-netsil.sh
+$ ./install-netsil.sh
 ```
 
 * Pull and run Netsil AOC (with `docker-compose`)
@@ -33,7 +33,7 @@ $ docker-compose up -d
 
 Remember to specify the address of your Netsil AOC instance
 ```
-NETSIL_HOST=<Your AOC address here> install-netsil-collectors.sh
+NETSIL_HOST=<Your AOC address here> ./install-netsil-collectors.sh
 ```
 
 ### Using Netsil
