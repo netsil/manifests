@@ -10,18 +10,6 @@ The installation instructions below use the dcos-cli, but you may do them throug
 
 If you wish to do so, you may install only the collectors on your mesos cluster, and install Netsil AOC elsewhere.
 
-Instructions for this situation will follow below.
-
-## Resource Requirements
-You will need to provide a mesos agent node with sufficient resources to run Netsil AOC. 
-
-For your Netsil AOC instance, we recommend:
-
-- 8 CPU
-- 32 GB Memory
-- 500 GB Hard Disk Space
-
-
 ### Installing Netsil AOC
 * Install the AOC on Marathon
     

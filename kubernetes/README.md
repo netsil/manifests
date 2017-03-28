@@ -9,20 +9,6 @@ The collectors are installed on your application servers and mirror the traffic 
 
 If you wish to do so, you may install only the collectors on your main kubernetes cluster, and install Netsil AOC elsewhere.
 
-Instructions for this situation will follow below.
-
-
-## Resource Requirements
-You will need to allocate a kubernetes node with sufficient resources to run Netsil AOC. 
-
-For your Netsil AOC instance, we recommend:
-
-- 8 CPU
-- 32 GB Memory
-- 500 GB Hard Disk Space
-
-This matches an m4.2xlarge in AWS.
-
 
 ### Installing Netsil AOC
 * Create ```netsil``` namespace
