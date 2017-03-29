@@ -12,7 +12,7 @@ The collectors are installed on your application servers and mirror the traffic 
 
 To install Netsil AOC and the collectors, refer to the README of the subdirectory that corresponds to your deploy environment.
 
-After installation, you will be prompted to create a license key, which you can create [here](https://lm.netsil.com).
+After installation, you will be prompted to provide a license key, which you can create [here](https://lm.netsil.com).
 
 ## Prerequisites and Resource Requirements
 You will need to allocate a machine with sufficient resources to run Netsil AOC. 
