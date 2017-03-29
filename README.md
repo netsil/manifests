@@ -25,7 +25,7 @@ For your Netsil AOC instance, we recommend:
 - 500 GB Hard Disk Space
 
 ### Ports
-Ensure that port **443** and/or port **80** is open for web access to Netsil AOC through HTTPS or HTTP
+Ensure that port **443** and port **80** (optional) are open for web access to Netsil AOC through HTTPS or HTTP
 
 Additionally, the following ports must be open to inbound traffic from the collectors:
 - **2001** (TCP) for collectors metrics channel.
