@@ -56,7 +56,6 @@ daemonset "collector" created
 
 
 ## Host Network and Flannel
-
 If you are using Flannel as your network overlay it is possible you might run into the following issue: 
 
 https://github.com/kubernetes/kubernetes/issues/20391
@@ -65,6 +64,12 @@ To work around this problem, you will want to run the following command on the h
 
 
 iptables -t nat -I POSTROUTING -o flannel.1 -s *host-private-ip* -j MASQUERADE
+
+
+## Google Container Engine
+If you are using Google Container Engine to provision your Kubernetes cluster, you will need to modify the volume host paths in `netsil-rc.yaml` (and `netsil.yml`, if you are using that manifest file).
+
+The **hostPath** mounts default to directories within `/opt/netsil`, but the `/opt` folder is read-only for clusters provisioned by Google Container Engine. Thus, you should modify the `/opt/netsil` **hostPath** mounts to a different path like `/var/lib/netsil`, for instance.
 
 
 ## Using Netsil
