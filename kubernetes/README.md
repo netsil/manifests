@@ -69,7 +69,7 @@ iptables -t nat -I POSTROUTING -o flannel.1 -s *host-private-ip* -j MASQUERADE
 ## Google Container Engine
 If you are using Google Container Engine to provision your Kubernetes cluster, you will need to modify the volume host paths in `netsil-rc.yaml` (and `netsil.yml`, if you are using that manifest file).
 
-The **hostPath** mounts default to directories within `/opt/netsil`, but the `/opt` folder is read-only for clusters provisioned by Google Container Engine. Thus, you should modify the `/opt/netsil` **hostPath** mounts to a different path like `/var/lib/netsil`, for instance.
+The **hostPath** mount directives default to directories within `/opt/netsil`, but the `/opt` folder is read-only for clusters provisioned by Google Container Engine. Thus, you should change the `/opt/netsil` **hostPath** mount directives to a different path, like `/var/lib/netsil` for instance.
 
 
 ## Using Netsil
