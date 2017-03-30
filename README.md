@@ -16,13 +16,14 @@ After installation, you will be prompted to provide a license key, which you can
 
 ## Prerequisites
 ### Resource Requirements
-You will need to allocate a machine with sufficient resources to run Netsil AOC. 
+You will need to allocate a machine with sufficient resources to run Netsil AOC.
+The requirements are listed below.
 
-For your Netsil AOC instance, we recommend:
-
-- 8 CPU
-- 32 GB Memory
-- 500 GB Hard Disk Space
+| Recommended | Minimum    |
+| ----------- | --------   |
+| 8 CPU       | 4 CPU      |
+| 32 GB Mem   | 16 GB Mem  |
+| 500 GB HDD  | 120 GB HDD |
 
 ### Ports
 Ensure that port **443** and port **80** (optional) are open for web access to Netsil AOC through HTTPS or HTTP
