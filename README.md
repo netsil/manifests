@@ -5,7 +5,7 @@ At the heart of the AOC is an auto-discovered service topology. It visualizes se
 
 See the "Gallery" below for some screenshots of Netsil in action!
 
-## Instructions
+## Introduction
 Netsil installation can be split into two parts: **Netsil AOC** and the **collectors**.
 
 The collectors are installed on your application servers and mirror the traffic back to Netsil AOC for analysis.
@@ -13,6 +13,9 @@ The collectors are installed on your application servers and mirror the traffic 
 To install Netsil AOC and the collectors, refer to the README of the subdirectory that corresponds to your deploy environment.
 
 After installation, you will be prompted to provide a license key, which you can create [here](https://lm.netsil.com).
+
+## Documentation
+The instructions below should be enough to get you started. However, you can browse through our full documentation [here](https://netsil.github.io/docs), which provides API documentation, user guides, and more.
 
 ## Prerequisites
 ### Resource Requirements
