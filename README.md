@@ -14,14 +14,30 @@ To install Netsil AOC and the collectors, refer to the README of the subdirector
 
 After installation, you will be prompted to provide a license key, which you can create [here](https://lm.netsil.com).
 
-## Prerequisites and Resource Requirements
-You will need to allocate a machine with sufficient resources to run Netsil AOC. 
+## Prerequisites
+### Resource Requirements
+You will need to allocate a machine with sufficient resources to run Netsil AOC.
+The requirements are listed below.
 
-For your Netsil AOC instance, we recommend:
+| Recommended | Minimum    |
+| ----------- | --------   |
+| 8 CPU       | 4 CPU      |
+| 32 GB Mem   | 16 GB Mem  |
+| 500 GB HDD  | 120 GB HDD |
 
-- 8 CPU
-- 32 GB Memory
-- 500 GB Hard Disk Space
+### Ports
+Ensure that port **443** and port **80** (optional) are open for web access to Netsil AOC through HTTPS or HTTP
+
+Additionally, the following ports must be open to inbound traffic from the collectors:
+- **2001** (TCP) for collectors metrics channel.
+- **2003** (TCP and UDP) for collectors control and data channel.
+- **5005** (TCP) for collectors load balancer channel.
+
+Finally, Netsil requires an open channel to a license site for verifying your license key.
+Thus, ensure that you can reach `lm.netsil.com` on port 443 from where you are running Netsil AOC.
+
+## Support
+For help please join our public [slack channel](https://netsil-users.slack.com) or email support@netsil.com 
 
 ## Gallery
 ![alt text](https://s3.amazonaws.com/docs.netsil.com/screenshots/default-map.png "Netsil Topology Main")
