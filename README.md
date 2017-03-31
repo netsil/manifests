@@ -15,7 +15,7 @@ To install Netsil AOC and the collectors, refer to the README of the subdirector
 After installation, you will be prompted to provide a license key, which you can create [here](https://lm.netsil.com).
 
 ## Documentation
-The instructions below should be enough to get you started. However, you can browse through our full documentation [here](https://netsil.github.io/docs), which provides API documentation, user guides, and more.
+The instructions below should be enough to get you started. However, you can browse through our [full documentation](https://netsil.github.io/docs), which provides API documentation, user guides, and more.
 
 ## Prerequisites
 ### Resource Requirements
