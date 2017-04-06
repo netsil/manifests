@@ -28,7 +28,6 @@ spec:
         - containerPort: 2003
         - containerPort: 2003
           protocol: UDP
-        - containerPort: 5005
         volumeMounts:
         - name: alerts
           mountPath: /opt/netsil/alerts/data

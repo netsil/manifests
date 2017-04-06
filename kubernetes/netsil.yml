@@ -33,7 +33,6 @@ spec:
         - containerPort: 2003
         - containerPort: 2003
           protocol: UDP
-        - containerPort: 5005
         volumeMounts:
         - name: alerts
           mountPath: /opt/netsil/alerts/data
@@ -119,8 +118,6 @@ spec:
     - name: port2003udp
       port: 2003
       protocol: UDP
-    - name: port5005
-      port: 5005
   type: NodePort
 ---
 apiVersion: extensions/v1beta1
