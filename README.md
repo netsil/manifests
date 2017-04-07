@@ -12,8 +12,6 @@ The collectors are installed on your application servers and mirror the traffic 
 
 To install Netsil AOC and the collectors, refer to the README of the subdirectory that corresponds to your deploy environment.
 
-After installation, you will be prompted to provide a license key, which you can create [here](https://lm.netsil.com).
-
 ## Documentation
 The instructions below should be enough to get you started. However, you can browse through our [full documentation](https://netsil.github.io/docs), which provides API documentation, user guides, and more.
 
@@ -35,9 +33,6 @@ Additionally, the following ports must be open to inbound traffic from the colle
 - **2001** (TCP) for collectors metrics channel.
 - **2003** (TCP and UDP) for collectors control and data channel.
 - **5005** (TCP) for collectors load balancer channel.
-
-Finally, Netsil requires an open channel to a license site for verifying your license key.
-Thus, ensure that you can reach `lm.netsil.com` on port 443 from where you are running Netsil AOC.
 
 ## Support
 For help please join our public [slack channel](https://netsil-users.slack.com) or email support@netsil.com 
