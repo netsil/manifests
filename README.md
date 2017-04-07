@@ -1,5 +1,5 @@
 ## About
-Netsil is a next-gen observability and analytics tool for modern cloud applications. The Netsil Application Operations Center (AOC) helps SREs and DevOps improve the reliability and performance of API and microservices-driven production applications.
+Netsil Application Operations Center (AOC) is a next-gen observability and analytics tool for modern cloud applications. The Netsil AOC helps SREs and DevOps improve the reliability and performance of API and microservices-driven production applications.
 
 At the heart of the AOC is an auto-discovered service topology. It visualizes service dependencies and operational metrics so practitioners can work collaboratively across teams. 
 
