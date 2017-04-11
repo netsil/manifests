@@ -32,6 +32,8 @@ spec:
           value: '2001'
         - name: DEPLOY_ENV
           value: 'docker'
+        - name: SAMPLINGRATE
+          value: '32'
         volumeMounts:
         - name: cgroup
           mountPath: /host/sys/fs/cgroup/
