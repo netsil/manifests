@@ -1,7 +1,7 @@
 {
   "id": "netsil",
   "cpus": 4,
-  "mem": 12000,
+  "mem": 16000,
   "disk": 0,
   "instances": 1,
   "acceptedResourceRoles": [
@@ -132,7 +132,7 @@
       }
     ],
     "docker": {
-      "image": "netsil/netsil:stable-1.1.3",
+      "image": "netsil/netsil:stable-1.2.0",
       "network": "BRIDGE",
       "portMappings": [
         {
