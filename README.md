@@ -29,7 +29,7 @@ The requirements are listed below.
 ### Ports
 Ensure that port **443** and port **80** (optional) are open for web access to Netsil AOC through HTTPS or HTTP
 
-Additionally, the following ports must be open to inbound traffic from the collectors:
+Additionally, the following ports must be open to inbound traffic on the AOC:
 - **2001** (TCP) for collectors metrics channel.
 - **2003** (TCP and UDP) for collectors control and data channel.
 - **5005** (TCP) for collectors load balancing channel.
