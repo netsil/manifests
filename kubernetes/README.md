@@ -1,5 +1,6 @@
 ## Pre-installation Instructions
 Prerequisites
+- Please check the [resource requirements](https://github.com/netsil/manifests#prerequisites)
 - Running kubernetes cluster
 - Configured kubectl
 
