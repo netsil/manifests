@@ -1,5 +1,6 @@
 ## Pre-installation Instructions
 Prerequisites
+- Please check the [resource requirements](https://github.com/netsil/manifests#prerequisites)
 - Docker daemon, running v1.10.0 or above
 
 ### Installing Netsil AOC
