@@ -1,5 +1,6 @@
 ## Pre-installation Instructions
 Prerequisites
+- Please check the [resource requirements](https://github.com/netsil/manifests#prerequisites)
 - A running instance of Marathon, v1.1.1 or above
 
 The installation instructions below use the dcos-cli, but you may do them through the Marathon UI as well.
