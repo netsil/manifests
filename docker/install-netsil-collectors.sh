@@ -17,4 +17,4 @@ docker run -td \
        -e NETSIL_INFRA_PORT=2001 \
        -e DEPLOY_ENV="docker" \
        -e SAMPLINGRATE=32 \
-       netsil/collectors:stable-1.2.0
+       netsil/collectors:stable-1.2.1
