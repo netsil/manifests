@@ -4,7 +4,7 @@ Prerequisites
 - Running kubernetes cluster
 - Configured kubectl
 
-### Installation
+## Installation
 * Create ```netsil``` namespace
 ```
 $ kubectl create -f netsil-ns.yaml 
@@ -27,7 +27,11 @@ $ kubectl create -f netsil-svc.yaml
 service "netsil" created
 
 ```
-## Host Network and Flannel
+## Usage
+Unless you have modified the port settings in the given service files, you can access Netsil through your master public IP on https, port 443. 
+
+## Misc
+### Host Network and Flannel
 If you are using Flannel as your network overlay it is possible you might run into the following issue: 
 
 https://github.com/kubernetes/kubernetes/issues/20391
@@ -38,10 +42,7 @@ To work around this problem, you will want to run the following command on the h
 iptables -t nat -I POSTROUTING -o flannel.1 -s *host-private-ip* -j MASQUERADE
 
 
-## Google Container Engine
+### Google Container Engine
 If you are using Google Container Engine to provision your Kubernetes cluster, you may need to modify the volume host paths in `netsil-rc.yaml` (and `netsil.yml`, if you are using that manifest file).
 
 The **hostPath** mount directives default to directories within `/opt/netsil`, but for certain operating systems provisioned by GKE, the `/opt` folder is read-only. Thus, you should change the `/opt/netsil` **hostPath** mount directives to a different path, like `/var/lib/netsil` for instance.
-
-## Usage
-Unless you have modified the port settings in the given service files, you can access Netsil through your master public IP on https, port 443. 
