@@ -10,7 +10,7 @@ Installation is done in two parts: **Netsil AOC** and the **Netsil Collectors**.
 
 The collectors are installed on your application instances (VMs or containerized environments) and mirror the service interactions & metrics back to Netsil AOC for real-time analysis.
 
-You **do not** need to install the collectors in the same environment where you installed the AOC.
+You may install the collectors in a variety of environments, independent of the AOC environment.
 For instance, you may run the AOC as a standalone docker container, but install the collectors in Kubernetes.
 
 ## Installation

@@ -1,15 +1,15 @@
 ## Pre-installation Instructions
 Prerequisites
-- Please check the [resource requirements](https://github.com/netsil/manifests#prerequisites)
-- Docker daemon, running v1.10.0 or above
+* Please check the [resource requirements](https://github.com/netsil/manifests#prerequisites)
+* Docker daemon, running v1.10.0 or above
 
 ### Installation
-* Pull and run Netsil AOC with `docker run` command
+* Docker Run Method
 ```
 ./install-netsil.sh
 ```
 
-* Alternatively, you may use docker-compose
+* Docker Compose Method
 ```
 docker-compose up -d
 ```
