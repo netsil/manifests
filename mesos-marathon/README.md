@@ -3,13 +3,13 @@ Prerequisites
 - Please check the [resource requirements](https://github.com/netsil/manifests#prerequisites)
 - A running instance of Marathon, v1.1.1 or above
 
-The installation instructions below use the dcos-cli, but you may use the the Marathon UI as well.
+The instructions below use the dcos-cli, but you may use the the Marathon UI instead.
 
 ### Installation
 * Install the AOC on Marathon
     
 ```
-$ dcos marathon app add netsil-dcos.json
+dcos marathon app add netsil-dcos.json
 ```
 
 ### Usage
