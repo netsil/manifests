@@ -11,12 +11,16 @@ Installation is done in two parts: **Netsil AOC** and the **Netsil Collectors**.
 The collectors are installed on your application instances (VMs or containerized environments) and mirror the service interactions & metrics back to Netsil AOC for real-time analysis.
 
 You **do not** need to install the collectors in the same environment where you installed the AOC.
-For instance, you may run the AOC as a standalone docker container, but install the collectors in Kubernetes, if you wish.
+For instance, you may run the AOC as a standalone docker container, but install the collectors in Kubernetes.
 
-To install Netsil AOC and the collectors, refer to the README of the subdirectory that corresponds to your deploy environment.
+To install the AOC, refer to the subdirectory of this repository that corresponds to your deploy environment.
+
+To install the collectors, refer to the `Documentation > Collectors` tab within your AOC instance.
 
 ## Documentation
-The instructions below should be enough to get you started. However, you can browse through our [full documentation](https://netsil.github.io/docs), which provides API documentation, user guides, and more.
+The instructions below should be enough to get you started. However, you can browse through our [full documentation](https://netsil.github.io/docs), which provides API definitions, user guides, and more. 
+
+You may also reach this site from the `Documentation` tab within your AOC instance. The documentation within the AOC is more likely to be in-sync with your current version of Netsil.
 
 ## Prerequisites
 ### Resource Requirements

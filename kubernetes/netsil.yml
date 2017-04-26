@@ -110,7 +110,7 @@ spec:
       port: 80
     - name: https
       port: 443
-      nodePort: 30443
+      nodePort: 443
     - name: port2001
       port: 2001
     - name: port2003

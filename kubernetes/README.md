@@ -39,19 +39,9 @@ iptables -t nat -I POSTROUTING -o flannel.1 -s *host-private-ip* -j MASQUERADE
 
 
 ## Google Container Engine
-If you are using Google Container Engine to provision your Kubernetes cluster, you will need to modify the volume host paths in `netsil-rc.yaml` (and `netsil.yml`, if you are using that manifest file).
+If you are using Google Container Engine to provision your Kubernetes cluster, you may need to modify the volume host paths in `netsil-rc.yaml` (and `netsil.yml`, if you are using that manifest file).
 
-The **hostPath** mount directives default to directories within `/opt/netsil`, but the `/opt` folder is read-only for clusters provisioned by Google Container Engine. Thus, you should change the `/opt/netsil` **hostPath** mount directives to a different path, like `/var/lib/netsil` for instance.
-
+The **hostPath** mount directives default to directories within `/opt/netsil`, but for certain operating systems provisioned by GKE, the `/opt` folder is read-only. Thus, you should change the `/opt/netsil` **hostPath** mount directives to a different path, like `/var/lib/netsil` for instance.
 
 ## Usage
-This section applies if you have installed Netsil AOC on your kubernetes cluster.
-
-Unless you have modified the port settings in the service files above, these are the ports that should be opened to run Netsil:
-
-Incoming UDP ports: 2003
-Incoming TCP ports: 30443, 2001, 2003
-
-All your external services will be monitored now using Netsil.
-
-You can access Netsil by hitting your master public IP and appending *30443*. 
+Unless you have modified the port settings in the given service files, you can access Netsil through your master public IP on https, port 443. 
