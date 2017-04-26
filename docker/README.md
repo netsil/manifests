@@ -1,26 +1,18 @@
 ## Pre-installation Instructions
 Prerequisites
-- Please check the [resource requirements](https://github.com/netsil/manifests#prerequisites)
-- Docker daemon, running v1.10.0 or above
+* Please check the [resource requirements](https://github.com/netsil/manifests#prerequisites)
+* Docker daemon, running v1.10.0 or above
 
-### Installing Netsil AOC
-* Pull and run Netsil AOC with `docker run` command
+### Installation
+* Docker Run Method
 ```
-$ ./install-netsil.sh
-```
-
-* Alternatively, you may use docker-compose
-```
-$ docker-compose up -d
+./install-netsil.sh
 ```
 
-### Installing Collectors
-* Run a collector 
-
-Remember to specify the address of your Netsil AOC instance
+* Docker Compose Method
 ```
-NETSIL_HOST=<Your AOC address here> ./install-netsil-collectors.sh
+docker-compose up -d
 ```
 
-### Using Netsil
+### Usage
 After Netsil has started, you can access the AOC from your web browser at `https://<Your AOC address>` 
