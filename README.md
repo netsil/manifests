@@ -13,6 +13,7 @@ The collectors are installed on your application instances (VMs or containerized
 You **do not** need to install the collectors in the same environment where you installed the AOC.
 For instance, you may run the AOC as a standalone docker container, but install the collectors in Kubernetes.
 
+## Installation
 To install the AOC, refer to the subdirectory of this repository that corresponds to your deploy environment.
 
 To install the collectors, refer to the `Documentation > Collectors` tab within your AOC instance.
