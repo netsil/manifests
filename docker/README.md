@@ -6,12 +6,12 @@ Prerequisites
 ### Installation
 * Pull and run Netsil AOC with `docker run` command
 ```
- ./install-netsil.sh
+./install-netsil.sh
 ```
 
 * Alternatively, you may use docker-compose
 ```
- docker-compose up -d
+docker-compose up -d
 ```
 
 ### Usage

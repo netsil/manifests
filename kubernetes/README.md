@@ -7,14 +7,12 @@ Prerequisites
 ## Installation
 * Create ```netsil``` namespace
 ```
-$ kubectl create -f netsil-ns.yaml 
-namespace "netsil" created
+kubectl create -f netsil-ns.yaml 
 ```
 
 * Create ```netsil``` replication controller
 ```
-$ kubectl create -f netsil-rc.yaml 
-replicationcontroller "netsil" created
+kubectl create -f netsil-rc.yaml 
 ```
 
 * Create ```netsil``` service.
@@ -22,11 +20,10 @@ replicationcontroller "netsil" created
 At this point you might want to modify ```netsil-svc.yaml``` to change the type of service to ```LoadBalancer``` if you are using a cloud provider plugin that supports load balancers or create an ```Ingress``` if you have an Ingress Controller.
 
 ```
-$ kubectl create -f netsil-svc.yaml 
-(possible warning to open ports)
-service "netsil" created
-
+# (possible warning to open ports)
+kubectl create -f netsil-svc.yaml 
 ```
+
 ## Usage
 Unless you have modified the port settings in the given service files, you can access Netsil through your master public IP on https, port 443. 
 
