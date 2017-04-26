@@ -1,7 +1,7 @@
 ### Installation
 * Create a ```netsil``` namespace.
     
-If you installed Netsil AOC within kubernetes with the instructions above, you should have already done this and you can skip this step.
+If you installed Netsil AOC within kubernetes, you should have already done this and you can skip this step.
 ```
 $ kubectl create -f netsil-ns.yaml 
 namespace "netsil" created
@@ -20,4 +20,3 @@ This will create a Netsil collector agent in every node of the cluster.
 $ kubectl create -f collector.yaml
 daemonset "collector" created
 ```
-

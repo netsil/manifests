@@ -4,9 +4,6 @@ Prerequisites
 - Running kubernetes cluster
 - Configured kubectl
 
-If you wish to do so, you may install only the collectors on your main kubernetes cluster, and install Netsil AOC elsewhere.
-
-
 ### Installation
 * Create ```netsil``` namespace
 ```
@@ -47,7 +44,7 @@ If you are using Google Container Engine to provision your Kubernetes cluster, y
 The **hostPath** mount directives default to directories within `/opt/netsil`, but the `/opt` folder is read-only for clusters provisioned by Google Container Engine. Thus, you should change the `/opt/netsil` **hostPath** mount directives to a different path, like `/var/lib/netsil` for instance.
 
 
-## Using Netsil
+## Usage
 This section applies if you have installed Netsil AOC on your kubernetes cluster.
 
 Unless you have modified the port settings in the service files above, these are the ports that should be opened to run Netsil:

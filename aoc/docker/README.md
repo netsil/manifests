@@ -14,5 +14,5 @@ $ ./install-netsil.sh
 $ docker-compose up -d
 ```
 
-### Using Netsil
+### Usage
 After Netsil has started, you can access the AOC from your web browser at `https://<Your AOC address>` 
