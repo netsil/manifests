@@ -45,7 +45,7 @@ Finally, Netsil requires an open channel to a license site for verifying your li
 Thus, ensure that you can reach `lm.netsil.com` on port 443 from where you are running Netsil AOC.
 
 ## Support
-For help please join our public [slack channel](https://netsil-users.slack.com) or email support@netsil.com 
+For help please join our public [slack channel](http://slack.netsil.com) or email support@netsil.com
 
 ## Gallery
 ![alt text](https://s3.amazonaws.com/docs.netsil.com/screenshots/default-map.png "Netsil Topology Main")
