@@ -1,6 +1,6 @@
 ## Pre-installation Instructions
-* Below is the minimum set of permissions necessary for the AWS user that is used to launch our cloudformation template:
-
+Below is the minimum set of permissions necessary for the AWS user that is used to launch our cloudformation template
+    
 ```json
 {
     "Version": "2012-10-17",
@@ -34,9 +34,9 @@
 ```
 
 ### Installation
-* Choose the AWS region where you intend to launch Netsil AOC. Then click on **Launch Stack**. If you are signed into AWS, it will take you directly to the cloudformation console.
+Choose the AWS region where you intend to launch Netsil AOC. Then click on **Launch Stack**. If you are signed into AWS, it will take you directly to the cloudformation console.
     
-| Region    | Cloudformation Launch Link                                                                                                                                                                                                                                               |
+| Region    | CF Launch Link                                                                                                                                                                                                                                             |
 | --------- | :-----------------------------:                                                                                                                                                                                                                                          |
 | us-west-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-west-1#/stacks/new?templateURL=https://s3.amazonaws.com/netsil-cf-templates/netsil-cloudformation.json) |
 | us-west-2 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new?templateURL=https://s3.amazonaws.com/netsil-cf-templates/netsil-cloudformation.json) |
@@ -51,6 +51,6 @@
 
 
 ### Usage
-* After the stack has been created, you can access the AOC from the link in the **Output** tab of your cloudformation page.
-  * Wait around 10 minutes after stack creation for the Netsil AOC UI to be available.
+After the stack has been created, you can access the AOC from the link in the **Output** tab of your cloudformation page. 
+Wait around 10 minutes after stack creation for the Netsil AOC UI to be available.
 
