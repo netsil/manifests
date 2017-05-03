@@ -1,0 +1,271 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "AWS Cloudformation script to deploy Netsil AOC",
+    "Parameters": {
+        "VPC": {
+            "Description": "Name of an existing VPC ID where you will install Netsil AOC",
+            "Type": "AWS::EC2::VPC::Id",
+            "ConstraintDescription": "Must be the name of an existing VPC."
+        },
+        "Subnet": {
+            "Description": "Name of an existing Subnet ID where you will install Netsil AOC",
+            "Type": "AWS::EC2::Subnet::Id",
+            "ConstraintDescription": "Must be the name of an existing subnet that is within the vpc you selected."
+        },
+        "KeyName": {
+            "Description": "Name of an existing EC2 KeyPair to enable SSH access to the instances",
+            "Type": "AWS::EC2::KeyPair::KeyName",
+            "ConstraintDescription": "Must be the name of an existing EC2 KeyPair."
+        },
+        "InstanceType": {
+            "Description": "Netsil AOC EC2 instance type",
+            "Type": "String",
+            "Default": "m4.2xlarge",
+            "AllowedValues": [
+                "t2.xlarge",
+                "t2.2xlarge",
+                "m4.xlarge",
+                "m4.2xlarge"
+            ],
+            "ConstraintDescription": "Must be a valid EC2 instance type."
+        },
+        "AdminLocation": {
+            "Description": "The IP address range that can be used to SSH to the EC2 instances and access the Web UI",
+            "Type": "String",
+            "MinLength": "9",
+            "MaxLength": "18",
+            "Default": "0.0.0.0/0",
+            "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
+            "ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x."
+        }
+    },
+
+    "Mappings": {
+        "AWSInstanceType2Arch": {
+            "t2.xlarge": {
+                "Arch": "HVM64"
+            },
+            "t2.2xlarge": {
+                "Arch": "HVM64"
+            },
+            "m4.xlarge": {
+                "Arch": "HVM64"
+            },
+            "m4.2xlarge": {
+                "Arch": "HVM64"
+            }
+        },
+        "AWSRegionArch2AMI": {
+            "us-east-1": {
+                "HVM64": "ami-dadb53cc"
+            },
+            "us-east-2": {
+                "HVM64": "ami-32b39757"
+            },
+            "us-west-1": {
+                "HVM64": "ami-12597c72"
+            },
+            "us-west-2": {
+                "HVM64": "ami-fa64f49a"
+            },
+            "eu-west-1": {
+                "HVM64": "ami-004c7666"
+            },
+            "eu-central-1": {
+                "HVM64": "ami-0c9a4863"
+            },
+            "ap-northeast-1": {
+                "HVM64": "ami-c36446a4"
+            },
+            "ap-southeast-1": {
+                "HVM64": "ami-4a51ef29"
+            },
+            "ap-south-1": {
+                "HVM64": "ami-968dfef9"
+            },
+            "sa-east-1": {
+                "HVM64": "ami-7a402216"
+            }
+        }
+    },
+
+    "Resources": {
+        "NetsilAOC": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "AWSRegionArch2AMI",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        {
+                            "Fn::FindInMap": [
+                                "AWSInstanceType2Arch",
+                                {
+                                    "Ref": "InstanceType"
+                                },
+                                "Arch"
+                            ]
+                        }
+                    ]
+                },
+                "InstanceType": {
+                    "Ref": "InstanceType"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "GroupSet": [
+                            {
+                                "Ref": "NetsilAOCPrivateSecurityGroup"
+                            },
+                            {
+                                "Ref": "NetsilAOCPublicSecurityGroup"
+                            }
+                        ],
+                        "AssociatePublicIpAddress": "true",
+                        "DeviceIndex": "0",
+                        "DeleteOnTermination": "true",
+                        "SubnetId": {
+                            "Ref": "Subnet"
+                        }
+                    }
+                ],
+                "KeyName": {
+                    "Ref": "KeyName"
+                }
+            },
+            "DependsOn": [
+                "NetsilAOCPublicSecurityGroup",
+                "NetsilAOCPrivateSecurityGroup"
+            ]
+        },
+        "NetsilAOCPrivateSecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Private VPC between Netsil and Collectors.",
+                "VpcId": {"Ref": "VPC"}
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "f83a23e3-bf4d-4700-aa55-56ce01bcd129"
+                }
+            }
+        },
+        "NetsilAOCPublicSecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Ports for public access of Netsil AOC UI",
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "80",
+                        "ToPort": "80",
+                        "CidrIp": {
+                            "Ref": "AdminLocation"
+                        }
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "443",
+                        "ToPort": "443",
+                        "CidrIp": {
+                            "Ref": "AdminLocation"
+                        }
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "22",
+                        "ToPort": "22",
+                        "CidrIp": {
+                            "Ref": "AdminLocation"
+                        }
+                    }
+                ],
+                "VpcId": {"Ref": "VPC"}
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "0d537a26-37be-44b2-97a1-9da0fcb7e69e"
+                }
+            }
+        },
+        "NetsilAOCSecurityGroupIngressOne": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "NetsilAOCPrivateSecurityGroup"
+                },
+                "IpProtocol": "tcp",
+                "FromPort": "2001",
+                "ToPort": "2001",
+                "SourceSecurityGroupId": {
+                    "Ref": "NetsilAOCPrivateSecurityGroup"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "a1484bd4-6325-4878-b325-45ce02dbb26c"
+                }
+            }
+        },
+        "NetsilAOCSecurityGroupIngressTwo": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "NetsilAOCPrivateSecurityGroup"
+                },
+                "IpProtocol": "tcp",
+                "FromPort": "2003",
+                "ToPort": "2003",
+                "SourceSecurityGroupId": {
+                    "Ref": "NetsilAOCPrivateSecurityGroup"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "bd2056bf-e548-4ca3-bc9d-a8339f30d391"
+                }
+            }
+        },
+        "NetsilAOCSecurityGroupIngressThree": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "NetsilAOCPrivateSecurityGroup"
+                },
+                "IpProtocol": "tcp",
+                "FromPort": "3003",
+                "ToPort": "3003",
+                "SourceSecurityGroupId": {
+                    "Ref": "NetsilAOCPrivateSecurityGroup"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "59d04aac-d9b9-49b2-a5d2-ba3c81f6519c"
+                }
+            }
+        }
+    },
+
+    "Outputs": {
+        "WebsiteURL": {
+            "Value": {
+                "Fn::Join": [
+                    "",
+                    [
+                        "https://",
+                        {
+                            "Fn::GetAtt": [
+                                "NetsilAOC",
+                                "PublicDnsName"
+                            ]
+                        }
+                    ]
+                ]
+            },
+            "Description": "Netsil AOC Web UI"
+        }
+    }
+}
