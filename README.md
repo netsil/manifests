@@ -39,7 +39,8 @@ Ensure that port **443** and port **80** (optional) are open for web access to N
 
 Additionally, the following ports must be open on the AOC host to receive inbound traffic from the collectors:
 - **2001** (TCP) for collectors metrics channel.
-- **2003** (TCP and UDP) for collectors control and data channel.
+- **2003** (TCP) for collectors control channel.
+- **3003** (TCP) for collectors data channel.
 
 Finally, Netsil requires an open channel to a license site for verifying your license key.
 Thus, ensure that you can reach `lm.netsil.com` on port 443 from where you are running Netsil AOC.
