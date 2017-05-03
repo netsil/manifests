@@ -1,5 +1,5 @@
 ## Pre-installation Instructions
-Below is the minimum set of permissions necessary for the AWS user that is used to launch our cloudformation template
+Please ensure that the AWS user you use to launch the cloudformation template has the minimum set of permissions below
     
 ```json
 {
