@@ -3,6 +3,7 @@
 
 ### Usage
 * Choose the AWS region where you intend to launch Netsil AOC. Then click on **Launch Stack**. If you are signed into AWS, it will take you directly to the cloudformation console.
+    
 | Region    | Cloudformation Launch Link                                                                                                                                                                                                                                               |
 | --------- | -----------------------------                                                                                                                                                                                                                                            |
 | us-west-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-west-1#/stacks/new?templateURL=https://s3.amazonaws.com/netsil-cf-templates/netsil-cloudformation.json) |
@@ -10,9 +11,6 @@
 | us-east-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?templateURL=https://s3.amazonaws.com/netsil-cf-templates/netsil-cloudformation.json) |
 | us-east-2 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-2#/stacks/new?templateURL=https://s3.amazonaws.com/netsil-cf-templates/netsil-cloudformation.json) |
 | eu-west-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?templateURL=https://s3.amazonaws.com/netsil-cf-templates/netsil-cloudformation.json) |
-
-
-
 | eu-central-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/new?templateURL=https://s3.amazonaws.com/netsil-cf-templates/netsil-cloudformation.json) |
 | ap-southeast-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-southeast-1#/stacks/new?templateURL=https://s3.amazonaws.com/netsil-cf-templates/netsil-cloudformation.json) |
 | ap-northeast-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-northeast-1#/stacks/new?templateURL=https://s3.amazonaws.com/netsil-cf-templates/netsil-cloudformation.json) |
