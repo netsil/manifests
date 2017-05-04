@@ -50,18 +50,18 @@
             "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
             "ConstraintDescription": "Must be a valid IP CIDR range of the form x.x.x.x/x."
         },
-        "SGsource": {
+        "SGsourceType": {
             "Description": "Choose either 'Cidr' or 'SG'. This will restrict inbound traffic to the AOC from your application instances via Cidr or a security group, respectively",
             "Default": "Cidr",
             "Type": "String",
             "AllowedValues": ["Cidr", "SG"]
         },
         "SGsourceSG": {
-            "Description": "If you selected 'SG' for 'SGsource', specify the security group of your application instances. Otherwise, please pick the default security group for your VPC.",
+            "Description": "If you selected 'SG' for 'SGsourceType', specify the security group of your application instances. Otherwise, please pick the default security group for your VPC.",
             "Type": "AWS::EC2::SecurityGroup::Id"
         },
         "SGsourceVpcCidr": {
-            "Description": "If you selected 'Cidr' for 'SGsource', specify the Cidr of the VPC of your application instances. Ignore otherwise.",
+            "Description": "If you selected 'Cidr' for 'SGsourceType', specify the Cidr of the VPC of your application instances. Ignore otherwise.",
             "Default": "0.0.0.0/0",
             "Type": "String",
             "MinLength": "9",
@@ -71,8 +71,8 @@
         }
     },
     "Conditions": {
-        "SourceSGfromCidr" : {"Fn::Equals": [{"Ref": "SGsource"}, "Cidr"]},
-        "SourceSGfromSG": {"Fn::Equals": [{"Ref": "SGsource"}, "SG"]}
+        "SourceSGfromCidr" : {"Fn::Equals": [{"Ref": "SGsourceType"}, "Cidr"]},
+        "SourceSGfromSG": {"Fn::Equals": [{"Ref": "SGsourceType"}, "SG"]}
     },
     "Mappings": {
         "AWSInstanceType2Arch": {
@@ -330,10 +330,13 @@
                 }
             ],
             "ParameterLabels" : {
-                "VPC" : { "default" : "Which VPC should this be deployed to?" },
-                "Subnet" : { "default" : "Which subnet should this be deployed to?" },
-                "AdminLocation": { "default": "The IP address range that can be used to SSH to the EC2 instances and access the Web UI" },
-                "SGsource": { "default":  "Choose either 'Cidr' or 'SG'. This will restrict inbound traffic to the AOC from your application instances via Cidr or a security group, respectively" }
+                "VPC" : { "default" : "VPC to Deploy To" },
+                "Subnet" : { "default" : "Subnet to Deploy To" },
+                "AdminLocation": { "default": "Public IP Address Range" },
+                "SGsourceType": { "default":  "Source Type of Your Security Group" },
+                "SGsourceSG": { "default":  "SG Source Type" },
+                "SGsourceVpcCidr": { "default":  "Cidr Source Type" },
+
             }
         }
     },
