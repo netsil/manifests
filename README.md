@@ -35,7 +35,7 @@ The requirements are listed below.
 | 500 GB HDD  | 120 GB HDD |
 
 ### Ports
-Ensure that port **443** and port **80** (optional) are open for web access to Netsil AOC through HTTPS or HTTP
+Ensure that port **443** and port **80** (optional) are open for web access to Netsil AOC through HTTPS or HTTP.
 
 Additionally, the following ports must be open on the AOC host to receive inbound traffic from the collectors:
 - **2001** (TCP) for collectors metrics channel.
