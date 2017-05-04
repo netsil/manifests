@@ -17,6 +17,13 @@
             "Type": "AWS::EC2::KeyPair::KeyName",
             "ConstraintDescription": "Must be the name of an existing EC2 KeyPair."
         },
+        "VolumeSize": {
+            "Description": "Volume size of your EC2 instance",
+            "Type": "Number",
+            "MinValue": "80",
+            "Default": "120",
+            "ConstraintDescription": "Size must be greater than or equal to 80 GB."
+        },
         "InstanceType": {
             "Description": "Netsil AOC EC2 instance type",
             "Type": "String",
@@ -25,7 +32,12 @@
                 "t2.xlarge",
                 "t2.2xlarge",
                 "m4.xlarge",
-                "m4.2xlarge"
+                "m4.2xlarge",
+                "m4.4xlarge",
+                "c4.2xlarge",
+                "c4.4xlarge",
+                "r4.xlarge",
+                "r4.2xlarge"
             ],
             "ConstraintDescription": "Must be a valid EC2 instance type."
         },
@@ -52,6 +64,21 @@
                 "Arch": "HVM64"
             },
             "m4.2xlarge": {
+                "Arch": "HVM64"
+            },
+            "m4.4xlarge": {
+                "Arch": "HVM64"
+            },
+            "c4.2xlarge": {
+                "Arch": "HVM64"
+            },
+            "c4.4xlarge": {
+                "Arch": "HVM64"
+            },
+            "r4.xlarge": {
+                "Arch": "HVM64"
+            },
+            "r4.2xlarge": {
                 "Arch": "HVM64"
             }
         },
@@ -133,7 +160,16 @@
                 ],
                 "KeyName": {
                     "Ref": "KeyName"
-                }
+                },
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": "/dev/xvda",
+                        "Ebs": {
+                            "VolumeType": "gp2",
+                            "VolumeSize": { "Ref": "VolumeSize" }
+                        }
+                    }
+                ]
             },
             "DependsOn": [
                 "NetsilAOCPublicSecurityGroup",
@@ -145,11 +181,6 @@
             "Properties": {
                 "GroupDescription": "Private VPC between Netsil and Collectors.",
                 "VpcId": {"Ref": "VPC"}
-            },
-            "Metadata": {
-                "AWS::CloudFormation::Designer": {
-                    "id": "f83a23e3-bf4d-4700-aa55-56ce01bcd129"
-                }
             }
         },
         "NetsilAOCPublicSecurityGroup": {
@@ -183,11 +214,6 @@
                     }
                 ],
                 "VpcId": {"Ref": "VPC"}
-            },
-            "Metadata": {
-                "AWS::CloudFormation::Designer": {
-                    "id": "0d537a26-37be-44b2-97a1-9da0fcb7e69e"
-                }
             }
         },
         "NetsilAOCSecurityGroupIngressOne": {
@@ -201,11 +227,6 @@
                 "ToPort": "2001",
                 "SourceSecurityGroupId": {
                     "Ref": "NetsilAOCPrivateSecurityGroup"
-                }
-            },
-            "Metadata": {
-                "AWS::CloudFormation::Designer": {
-                    "id": "a1484bd4-6325-4878-b325-45ce02dbb26c"
                 }
             }
         },
@@ -221,14 +242,23 @@
                 "SourceSecurityGroupId": {
                     "Ref": "NetsilAOCPrivateSecurityGroup"
                 }
-            },
-            "Metadata": {
-                "AWS::CloudFormation::Designer": {
-                    "id": "bd2056bf-e548-4ca3-bc9d-a8339f30d391"
-                }
             }
         },
         "NetsilAOCSecurityGroupIngressThree": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "NetsilAOCPrivateSecurityGroup"
+                },
+                "IpProtocol": "udp",
+                "FromPort": "2003",
+                "ToPort": "2003",
+                "SourceSecurityGroupId": {
+                    "Ref": "NetsilAOCPrivateSecurityGroup"
+                }
+            }
+        },
+        "NetsilAOCSecurityGroupIngressFour": {
             "Type": "AWS::EC2::SecurityGroupIngress",
             "Properties": {
                 "GroupId": {
@@ -239,11 +269,6 @@
                 "ToPort": "3003",
                 "SourceSecurityGroupId": {
                     "Ref": "NetsilAOCPrivateSecurityGroup"
-                }
-            },
-            "Metadata": {
-                "AWS::CloudFormation::Designer": {
-                    "id": "59d04aac-d9b9-49b2-a5d2-ba3c81f6519c"
                 }
             }
         }
