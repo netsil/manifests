@@ -20,16 +20,22 @@
             "ConstraintDescription": "Must be a valid EC2 instance type."
         },
         "VolumeSize": {
-            "Description": "Storage size of your EC2 instance",
+            "Description": "Storage size of your EC2 instance.",
             "Type": "Number",
             "MinValue": "80",
-            "Default": "120",
+            "Default": "500",
             "ConstraintDescription": "Size must be greater than or equal to 80 GB."
         },
         "KeyName": {
             "Description": "Name of an existing EC2 KeyPair to enable SSH access to the instances",
             "Type": "AWS::EC2::KeyPair::KeyName",
             "ConstraintDescription": "Must be the name of an existing EC2 KeyPair."
+        },
+        "AssignPublicIP": {
+            "Description": "Whether or not to assign a public ip to your AOC instance.",
+            "AllowedValues": ["true", "false"],
+            "Default": "true",
+            "Type": "String",
         },
         "VPC": {
             "Description": "Name of an existing VPC ID where you will install Netsil AOC",
@@ -42,7 +48,7 @@
             "ConstraintDescription": "Must be the name of an existing subnet that is within the vpc you selected."
         },
         "AdminLocation": {
-            "Description": "The IP address range that can be used to SSH to the EC2 instances and access the Web UI",
+            "Description": "Specify a public IP address range to allow SSH and HTTP(S) access to the EC2 instance.",
             "Type": "String",
             "MinLength": "9",
             "MaxLength": "18",
@@ -50,18 +56,8 @@
             "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
             "ConstraintDescription": "Must be a valid IP CIDR range of the form x.x.x.x/x."
         },
-        "SGsourceType": {
-            "Description": "Choose either 'Cidr' or 'SG'. This will restrict inbound traffic to the AOC from your application instances via Cidr or a security group, respectively",
-            "Default": "Cidr",
-            "Type": "String",
-            "AllowedValues": ["Cidr", "SG"]
-        },
-        "SGsourceSG": {
-            "Description": "If you selected 'SG' for 'SGsourceType', specify the security group of your application instances. Otherwise, please pick the default security group for your VPC.",
-            "Type": "AWS::EC2::SecurityGroup::Id"
-        },
         "SGsourceVpcCidr": {
-            "Description": "If you selected 'Cidr' for 'SGsourceType', specify the Cidr of the VPC of your application instances. Ignore otherwise.",
+            "Description": "Specify a private IP address range to restrict inbound traffic to the AOC from your application instances.",
             "Default": "0.0.0.0/0",
             "Type": "String",
             "MinLength": "9",
@@ -172,7 +168,7 @@
                                 "Ref": "NetsilAOCPublicSecurityGroup"
                             }
                         ],
-                        "AssociatePublicIpAddress": "true",
+                        "AssociatePublicIpAddress": { "Ref": "AssignPublicIP" },
                         "DeviceIndex": "0",
                         "DeleteOnTermination": "true",
                         "SubnetId": {
@@ -198,86 +194,50 @@
                 "NetsilAOCPrivateSecurityGroup"
             ]
         },
+
         "NetsilAOCPrivateSecurityGroup": {
             "Type": "AWS::EC2::SecurityGroup",
             "Properties": {
                 "GroupDescription": "Private VPC between Netsil and Collectors.",
-                "SecurityGroupIngress": {
-                    "Fn::If": [
-                        "SourceSGfromCidr",
-                        [
-                            {
-                                "IpProtocol": "tcp",
-                                "FromPort": "2001",
-                                "ToPort": "2001",
-                                "CidrIp": {
-                                    "Ref": "SGsourceVpcCidr"
-                                }
-                            },
-                            {
-                                "IpProtocol": "tcp",
-                                "FromPort": "2003",
-                                "ToPort": "2003",
-                                "CidrIp": {
-                                    "Ref": "SGsourceVpcCidr"
-                                }
-                            },
-                            {
-                                "IpProtocol": "udp",
-                                "FromPort": "2003",
-                                "ToPort": "2003",
-                                "CidrIp": {
-                                    "Ref": "SGsourceVpcCidr"
-                                }
-                            },
-                            {
-                                "IpProtocol": "tcp",
-                                "FromPort": "3003",
-                                "ToPort": "3003",
-                                "CidrIp": {
-                                    "Ref": "SGsourceVpcCidr"
-                                }
+                "SecurityGroupIngress": {[
+                        {
+                            "IpProtocol": "tcp",
+                            "FromPort": "2001",
+                            "ToPort": "2001",
+                            "CidrIp": {
+                                "Ref": "SGsourceVpcCidr"
                             }
-                        ],
-                        [
-                            {
-                                "IpProtocol": "tcp",
-                                "FromPort": "2001",
-                                "ToPort": "2001",
-                                "SourceSecurityGroupId": {
-                                    "Ref": "SGsourceSG"
-                                }
-                            },
-                            {
-                                "IpProtocol": "tcp",
-                                "FromPort": "2003",
-                                "ToPort": "2003",
-                                "SourceSecurityGroupId": {
-                                    "Ref": "SGsourceSG"
-                                }
-                            },
-                            {
-                                "IpProtocol": "udp",
-                                "FromPort": "2003",
-                                "ToPort": "2003",
-                                "SourceSecurityGroupId": {
-                                    "Ref": "SGsourceSG"
-                                }
-                            },
-                            {
-                                "IpProtocol": "tcp",
-                                "FromPort": "3003",
-                                "ToPort": "3003",
-                                "SourceSecurityGroupId": {
-                                    "Ref": "SGsourceSG"
-                                }
+                        },
+                        {
+                            "IpProtocol": "tcp",
+                            "FromPort": "2003",
+                            "ToPort": "2003",
+                            "CidrIp": {
+                                "Ref": "SGsourceVpcCidr"
                             }
-                        ]
-                    ]
+                        },
+                        {
+                            "IpProtocol": "udp",
+                            "FromPort": "2003",
+                            "ToPort": "2003",
+                            "CidrIp": {
+                                "Ref": "SGsourceVpcCidr"
+                            }
+                        },
+                        {
+                            "IpProtocol": "tcp",
+                            "FromPort": "3003",
+                            "ToPort": "3003",
+                            "CidrIp": {
+                                "Ref": "SGsourceVpcCidr"
+                            }
+                        }
+                   ]
                 },
                 "VpcId": {"Ref": "VPC"}
             }
         },
+
         "NetsilAOCPublicSecurityGroup": {
             "Type": "AWS::EC2::SecurityGroup",
             "Properties": {
@@ -322,20 +282,19 @@
                 },
                 {
                     "Label" : { "default" : "Network Configuration" },
-                    "Parameters" : [ "VPC", "Subnet" ]
+                    "Parameters" : [ "VPC", "Subnet", "AssignPublicIP" ]
                 },
                 {
                     "Label" : { "default" : "Security Group Configuration" },
-                    "Parameters" : [ "AdminLocation", "SGsourceType", "SGsourceSG", "SGsourceVpcCidr" ]
+                    "Parameters" : [ "AdminLocation", "SGsourceVpcCidr" ]
                 }
             ],
             "ParameterLabels" : {
                 "VPC" : { "default" : "VPC to Deploy To" },
                 "Subnet" : { "default" : "Subnet to Deploy To" },
-                "AdminLocation": { "default": "Public IP Address Range" },
-                "SGsourceType": { "default":  "Source Type of Your Security Group" },
-                "SGsourceSG": { "default":  "SG Source Type" },
-                "SGsourceVpcCidr": { "default":  "Cidr Source Type" }
+                "AdminLocation": { "default": "Public CIDR Range" },
+                "SGsourceVpcCidr": { "default":  "Private CIDR Range" },
+                "AssignPublicIP": { "default": "Assign a Public IP Address"}
             }
         }
     },
@@ -356,7 +315,7 @@
                     ]
                 ]
             },
-            "Description": "Netsil AOC Web UI. Please wait around ten minutes after stack creation for this link to be available."
+            "Description": "Address of the Netsil AOC Web UI. Please wait around ten minutes after stack creation for this link to be available."
         }
     }
 }
