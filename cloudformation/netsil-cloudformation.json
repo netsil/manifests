@@ -18,7 +18,7 @@
             "ConstraintDescription": "Must be the name of an existing EC2 KeyPair."
         },
         "VolumeSize": {
-            "Description": "Volume size of your EC2 instance",
+            "Description": "Storage size of your EC2 instance",
             "Type": "Number",
             "MinValue": "80",
             "Default": "120",
@@ -48,10 +48,33 @@
             "MaxLength": "18",
             "Default": "0.0.0.0/0",
             "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
-            "ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x."
+            "ConstraintDescription": "Must be a valid IP CIDR range of the form x.x.x.x/x."
+        },
+        "SGsource": {
+            "Description": "Choose either 'Cidr' or 'SG' to specify the source of your application instances via Cidr or a security group",
+            "Default": "Cidr",
+            "Type": "String",
+            "AllowedValues": ["Cidr", "SG"]
+        },
+        "SGsourceVpcCidr": {
+            "Description": "If you selected 'Cidr' for 'SGsource', specify the Cidr of the VPC of your application instances. Ignore otherwise.",
+            "Default": "0.0.0.0/0",
+            "Type": "String",
+            "MinLength": "9",
+            "MaxLength": "18",
+            "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
+            "ConstraintDescription": "Must be a valid IP CIDR range of the form x.x.x.x/x."
+        },
+        "SGsourceSG": {
+            "Description": "If you selected 'SG' for 'SGsource', specify the security group of your application instances. Ignore otherwise.",
+            "Type": "AWS::EC2::SecurityGroup::Id",
+            "Default": "sg-abcd0123"
         }
     },
-
+    "Conditions": {
+        "SourceSGfromCidr" : {"Fn::Equals": [{"Ref": "SGsource"}, "Cidr"]},
+        "SourceSGfromSG": {"Fn::Equals": [{"Ref": "SGsource"}, "SG"]}
+    },
     "Mappings": {
         "AWSInstanceType2Arch": {
             "t2.xlarge": {
@@ -180,6 +203,79 @@
             "Type": "AWS::EC2::SecurityGroup",
             "Properties": {
                 "GroupDescription": "Private VPC between Netsil and Collectors.",
+                "SecurityGroupIngress": {
+                    "Fn::If": [
+                        "SourceSGfromCidr",
+                        [
+                            {
+                                "IpProtocol": "tcp",
+                                "FromPort": "2001",
+                                "ToPort": "2001",
+                                "CidrIp": {
+                                    "Ref": "SGsourceVpcCidr"
+                                }
+                            },
+                            {
+                                "IpProtocol": "tcp",
+                                "FromPort": "2003",
+                                "ToPort": "2003",
+                                "CidrIp": {
+                                    "Ref": "SGsourceVpcCidr"
+                                }
+                            },
+                            {
+                                "IpProtocol": "udp",
+                                "FromPort": "2003",
+                                "ToPort": "2003",
+                                "CidrIp": {
+                                    "Ref": "SGsourceVpcCidr"
+                                }
+                            },
+                            {
+                                "IpProtocol": "tcp",
+                                "FromPort": "3003",
+                                "ToPort": "3003",
+                                "CidrIp": {
+                                    "Ref": "SGsourceVpcCidr"
+                                }
+                            }
+                        ],
+                        [
+                            {
+                                "IpProtocol": "tcp",
+                                "FromPort": "2001",
+                                "ToPort": "2001",
+                                "SourceSecurityGroupId": {
+                                    "Ref": "SGsourceSG"
+                                }
+                            },
+                            {
+                                "IpProtocol": "tcp",
+                                "FromPort": "2003",
+                                "ToPort": "2003",
+                                "SourceSecurityGroupId": {
+                                    "Ref": "SGsourceSG"
+                                }
+                            },
+                            {
+                                "IpProtocol": "udp",
+                                "FromPort": "2003",
+                                "ToPort": "2003",
+                                "SourceSecurityGroupId": {
+                                    "Ref": "SGsourceSG"
+                                }
+                            },
+                            {
+                                "IpProtocol": "tcp",
+                                "FromPort": "3003",
+                                "ToPort": "3003",
+                                "SourceSecurityGroupId": {
+                                    "Ref": "SGsourceSG"
+                                }
+                            }
+                        ]
+                    ]
+                },
                 "VpcId": {"Ref": "VPC"}
             }
         },
@@ -214,62 +310,6 @@
                     }
                 ],
                 "VpcId": {"Ref": "VPC"}
-            }
-        },
-        "NetsilAOCSecurityGroupIngressOne": {
-            "Type": "AWS::EC2::SecurityGroupIngress",
-            "Properties": {
-                "GroupId": {
-                    "Ref": "NetsilAOCPrivateSecurityGroup"
-                },
-                "IpProtocol": "tcp",
-                "FromPort": "2001",
-                "ToPort": "2001",
-                "SourceSecurityGroupId": {
-                    "Ref": "NetsilAOCPrivateSecurityGroup"
-                }
-            }
-        },
-        "NetsilAOCSecurityGroupIngressTwo": {
-            "Type": "AWS::EC2::SecurityGroupIngress",
-            "Properties": {
-                "GroupId": {
-                    "Ref": "NetsilAOCPrivateSecurityGroup"
-                },
-                "IpProtocol": "tcp",
-                "FromPort": "2003",
-                "ToPort": "2003",
-                "SourceSecurityGroupId": {
-                    "Ref": "NetsilAOCPrivateSecurityGroup"
-                }
-            }
-        },
-        "NetsilAOCSecurityGroupIngressThree": {
-            "Type": "AWS::EC2::SecurityGroupIngress",
-            "Properties": {
-                "GroupId": {
-                    "Ref": "NetsilAOCPrivateSecurityGroup"
-                },
-                "IpProtocol": "udp",
-                "FromPort": "2003",
-                "ToPort": "2003",
-                "SourceSecurityGroupId": {
-                    "Ref": "NetsilAOCPrivateSecurityGroup"
-                }
-            }
-        },
-        "NetsilAOCSecurityGroupIngressFour": {
-            "Type": "AWS::EC2::SecurityGroupIngress",
-            "Properties": {
-                "GroupId": {
-                    "Ref": "NetsilAOCPrivateSecurityGroup"
-                },
-                "IpProtocol": "tcp",
-                "FromPort": "3003",
-                "ToPort": "3003",
-                "SourceSecurityGroupId": {
-                    "Ref": "NetsilAOCPrivateSecurityGroup"
-                }
             }
         }
     },
