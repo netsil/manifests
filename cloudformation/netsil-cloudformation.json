@@ -333,7 +333,7 @@
                 "VPC" : { "default" : "Which VPC should this be deployed to?" },
                 "Subnet" : { "default" : "Which subnet should this be deployed to?" },
                 "AdminLocation": { "default": "The IP address range that can be used to SSH to the EC2 instances and access the Web UI" },
-                "SGsource": { "default": { "Choose either 'Cidr' or 'SG'. This will restrict inbound traffic to the AOC from your application instances via Cidr or a security group, respectively" } }
+                "SGsource": { "default":  "Choose either 'Cidr' or 'SG'. This will restrict inbound traffic to the AOC from your application instances via Cidr or a security group, respectively" }
             }
         }
     },
