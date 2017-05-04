@@ -326,7 +326,7 @@
                 },
                 {
                     "Label" : { "default" : "Security Group Configuration" },
-                    "Parameters" : [ "AdminLocation", "SGsource", "SGsourceSG", "SGsourceVpcCidr" ]
+                    "Parameters" : [ "AdminLocation", "SGsourceType", "SGsourceSG", "SGsourceVpcCidr" ]
                 }
             ],
             "ParameterLabels" : {
@@ -335,8 +335,7 @@
                 "AdminLocation": { "default": "Public IP Address Range" },
                 "SGsourceType": { "default":  "Source Type of Your Security Group" },
                 "SGsourceSG": { "default":  "SG Source Type" },
-                "SGsourceVpcCidr": { "default":  "Cidr Source Type" },
-
+                "SGsourceVpcCidr": { "default":  "Cidr Source Type" }
             }
         }
     },
