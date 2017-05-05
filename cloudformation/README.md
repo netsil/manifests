@@ -49,7 +49,6 @@ Choose the AWS region where you intend to launch Netsil AOC. Then click on **Lau
 | ap-south-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-south-1#/stacks/new?templateURL=https://s3.amazonaws.com/downloads.netsil.io/specs/stable/netsil-cloudformation.json) |
 | sa-east-1 | [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=sa-east-1#/stacks/new?templateURL=https://s3.amazonaws.com/downloads.netsil.io/specs/stable/netsil-cloudformation.json) |
 
-
 ## Usage
 After the stack has been created, you can access the AOC from the link in the **Output** tab of your cloudformation page. 
 Wait around 10 minutes after stack creation for the Netsil AOC UI to be available.
