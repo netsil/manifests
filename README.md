@@ -1,7 +1,7 @@
 ## About
 Netsil Application Operations Center (AOC) is a next-gen observability and analytics tool for modern cloud applications. The Netsil AOC helps SREs and DevOps improve the reliability and performance of API and microservices-driven production applications.
 
-At the heart of the AOC is an auto-discovered service topology map. It visualizes service dependencies and operational metrics so practitioners can work collaboratively across teams. 
+At the heart of the AOC is an auto-discovered service topology map. It visualizes service dependencies and operational metrics so practitioners can work collaboratively across teams.
 
 See the "Gallery" below for some screenshots of Netsil in action!
 
@@ -10,8 +10,7 @@ Installation is done in two parts: **Netsil AOC** and the **Netsil Collectors**.
 
 The collectors are installed on your application instances (VMs or containerized environments) and mirror the service interactions & metrics back to Netsil AOC for real-time analysis.
 
-You may install the collectors in a variety of environments, independent of the AOC environment.
-For instance, you may run the AOC as a standalone docker container, but install the collectors in Kubernetes.
+You may install the collectors in a variety of environments, independent of the AOC environment. For instance, you may run the AOC as a standalone docker container, but install the collectors in Kubernetes.
 
 ## Installation
 To install the AOC, refer to the subdirectory of this repository that corresponds to your deploy environment.
@@ -23,28 +22,39 @@ The instructions below should be enough to get you started. However, you can bro
 
 You may also reach this site from the `Documentation` tab within your AOC instance. The documentation within the AOC is more likely to be in-sync with your current version of Netsil.
 
-## Prerequisites
-### Resource Requirements
-You will need to allocate an instance with sufficient resources to run Netsil AOC.
-The requirements are listed below.
+## Resource Requirements
+You will need to provide a machine with sufficient resources to run Netsil AOC:
+|  |**Recommended**|**Minimum**|
+|:---:|:---:|:---:|
+|vCPUs| 8 (or more) | 4 |
+|Memory| 32 GiB (or more) | 16 GiB |
+|Disk| 1 TB (or more) | 500 GiB |
 
-| Recommended | Minimum    |
-| ----------- | --------   |
-| 8 CPU       | 4 CPU      |
-| 32 GB Mem   | 16 GB Mem  |
-| 500 GB HDD  | 120 GB HDD |
+## Ports and Firewall Rules
+### Inbound
+Please open the inbound ports listed below. The "Your Private Subnet" source refers to the subnet where you are installing the collectors.
 
-### Ports
-Ensure that port **443** and port **80** (optional) are open for web access to Netsil AOC through HTTPS or HTTP.
+| **Port** | **Protocol** | **Source** |
+|:--------:|:------------:|:----------:|
+| 443      | TCP          | 0.0.0.0/0     |
+| 80       | TCP          | 0.0.0.0/0     |
+| 2001     | TCP          | Your Private Subnet |
+| 2003     | TCP          | Your Private Subnet |
+| 2003     | UDP          | Your Private Subnet |
 
-Additionally, the following ports must be open on the AOC host to receive inbound traffic from the collectors:
-- **2001** (TCP) for collectors metrics channel.
-- **2003** (TCP) for collectors control channel.
-- **2003** (UDP) for collectors data channel.
+- If you wish, you may also open port `22 (TCP)` for `SSH` access.
+- If you are deploying Netsil AOC behind a load balancer, make sure to use layer 4 load balancing instead of layer 7 to properly proxy WebSocket connections.
+- At the basic level, ensure that your Netsil AOC instance is reachable from the network where you are installing the collectors.
 
-Finally, Netsil requires an open channel to a license site for verifying your license key.
+### Outbound
+Netsil requires an open channel to a license site for verifying your license key.
 Thus, ensure that you can reach `lm.netsil.com` on port 443 from where you are running Netsil AOC.
 
+## Usage
+You may access the Netsil AOC Web UI at:
+```
+http[s]://<your.netsil.ip>
+```
 ## Support
 For help please join our public [slack channel](http://slack.netsil.com) or email support@netsil.com
 
