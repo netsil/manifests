@@ -24,6 +24,7 @@ You may also reach this site from the `Documentation` tab within your AOC instan
 
 ## Resource Requirements
 You will need to provide a machine with sufficient resources to run Netsil AOC:
+
 |  |**Recommended**|**Minimum**|
 |:---:|:---:|:---:|
 |vCPUs| 8 (or more) | 4 |
