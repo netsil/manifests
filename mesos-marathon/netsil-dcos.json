@@ -165,7 +165,8 @@
     "DCOS_SERVICE_PORT_INDEX": "0"
   },
   "residency": {
-    "taskLostBehavior": "WAIT_FOREVER"
+    "taskLostBehavior": "WAIT_FOREVER",
+    "relaunchEscalationTimeoutSeconds": 100
   },
   "upgradeStrategy": {
     "minimumHealthCapacity": 0,
