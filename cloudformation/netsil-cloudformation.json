@@ -45,7 +45,7 @@
         "Subnet": {
             "Description": "Name of an existing Subnet ID where you will install Netsil AOC",
             "Type": "AWS::EC2::Subnet::Id",
-            "ConstraintDescription": "Must be the name of an existing subnet that is within the vpc you selected."
+            "ConstraintDescription": "Must be the name of an existing subnet that is within the VPC you selected."
         },
         "AdminLocation": {
             "Description": "Specify a public IP address range to allow SSH and HTTP(S) access to the EC2 instance.",
@@ -285,8 +285,8 @@
                 }
             ],
             "ParameterLabels" : {
-                "VPC" : { "default" : "VPC to Deploy To" },
-                "Subnet" : { "default" : "Subnet to Deploy To" },
+                "VPC" : { "default" : "You must launch Netsil AOC in the same VPC as that of the applications you wish to monitor." },
+                "Subnet" : { "default" : "Ensure that your subnet is within your chosen VPC." },
                 "AdminLocation": { "default": "Public CIDR Range" },
                 "SGsourceVpcCidr": { "default":  "Private CIDR Range" },
                 "AssignPublicIP": { "default": "Assign a Public IP Address"}
