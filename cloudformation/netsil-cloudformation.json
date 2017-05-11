@@ -20,11 +20,11 @@
             "ConstraintDescription": "Must be a valid EC2 instance type."
         },
         "VolumeSize": {
-            "Description": "Storage size of your EC2 instance.",
+            "Description": "Storage size of your instance. Must be at least 120 GB.",
             "Type": "Number",
-            "MinValue": "80",
+            "MinValue": "120",
             "Default": "500",
-            "ConstraintDescription": "Size must be greater than or equal to 80 GB."
+            "ConstraintDescription": "Size must be greater than or equal to 120 GB."
         },
         "KeyName": {
             "Description": "Name of an existing EC2 KeyPair to enable SSH access to the instances",
@@ -32,18 +32,18 @@
             "ConstraintDescription": "Must be the name of an existing EC2 KeyPair."
         },
         "AssignPublicIP": {
-            "Description": "Whether or not to assign a public ip to your AOC instance.",
+            "Description": "You may want to choose <false> if you intend to access Netsil AOC behind a load balancer.",
             "AllowedValues": ["true", "false"],
             "Default": "true",
             "Type": "String",
         },
         "VPC": {
-            "Description": "Name of an existing VPC ID where you will install Netsil AOC",
+            "Description": "You must launch Netsil AOC in the same VPC as that of the applications you wish to monitor, or setup VPC peering when using a separate VPC.",
             "Type": "AWS::EC2::VPC::Id",
             "ConstraintDescription": "Must be the name of an existing VPC."
         },
         "Subnet": {
-            "Description": "Name of an existing Subnet ID where you will install Netsil AOC",
+            "Description": "Ensure that your subnet is within your chosen VPC.",
             "Type": "AWS::EC2::Subnet::Id",
             "ConstraintDescription": "Must be the name of an existing subnet that is within the VPC you selected."
         },
@@ -285,8 +285,8 @@
                 }
             ],
             "ParameterLabels" : {
-                "VPC" : { "default" : "You must launch Netsil AOC in the same VPC as that of the applications you wish to monitor." },
-                "Subnet" : { "default" : "Ensure that your subnet is within your chosen VPC." },
+                "VPC" : { "default" : "VPC to Deploy To" },
+                "Subnet" : { "default" : "Subnet to Deploy To" },
                 "AdminLocation": { "default": "Public CIDR Range" },
                 "SGsourceVpcCidr": { "default":  "Private CIDR Range" },
                 "AssignPublicIP": { "default": "Assign a Public IP Address"}
