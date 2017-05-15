@@ -12,7 +12,7 @@ You may install the collectors in a variety of environments, independent of the 
 For instance, you may run the AOC as a standalone docker container, but install the collectors in Kubernetes.
 
 ## Documentation
-Refer to our [documentation](https://netsil.github.io/docs) site for installation instructions, API definitions, user guides, and more. 
+Refer to our [documentation](https://docs.netsil.com) site for installation instructions, API definitions, user guides, and more. 
 
 ## Support
 For help please join our public [slack channel](http://slack.netsil.com) or email support@netsil.com
