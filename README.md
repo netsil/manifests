@@ -19,7 +19,7 @@ To install the AOC, refer to the subdirectory of this repository that correspond
 To install the collectors, refer to the `Documentation > Collectors` tab within your AOC instance.
 
 ## Documentation
-The instructions below should be enough to get you started. However, you can browse through our [full documentation](https://netsil.github.io/docs), which provides API definitions, user guides, and more. 
+The instructions below should be enough to get you started. However, you can browse through our [full documentation](https://docs.netsil.com), which provides API definitions, user guides, and more. 
 
 You may also reach this site from the `Documentation` tab within your AOC instance. The documentation within the AOC is more likely to be in-sync with your current version of Netsil.
 
