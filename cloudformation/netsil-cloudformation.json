@@ -122,7 +122,7 @@
                 "HVM64": "ami-f7c3c290"
             },
             "ap-south-1": {
-                "HVM64": ami-3bacd054"
+                "HVM64": "ami-3bacd054"
             },
             "sa-east-1": {
                 "HVM64": "ami-87a6cfeb"
