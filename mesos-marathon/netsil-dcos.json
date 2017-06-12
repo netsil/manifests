@@ -132,7 +132,7 @@
       }
     ],
     "docker": {
-      "image": "netsil/netsil:stable-1.4.3",
+      "image": "netsil/netsil:stable-1.4.4",
       "network": "BRIDGE",
       "portMappings": [
         {
