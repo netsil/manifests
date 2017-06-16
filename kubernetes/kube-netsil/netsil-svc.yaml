@@ -21,4 +21,4 @@ spec:
     - name: port2003udp
       port: 2003
       protocol: UDP
-  type: #SERVICE_TYPE#
+  type: NodePort
