@@ -24,9 +24,9 @@ checkCPURAM(){
         CPU_count=$(kubectl get nodes --output=jsonpath={.items[${n}].status.allocatable.cpu})
         RAM_count=$(kubectl get nodes --output=jsonpath={.items[${n}].status.allocatable.memory})
         # Removing the Ki in RAM count
-        RAM_count=${RAM_count::-2}
+        RAM_count=${RAM_count%??}
         if [[ "$PRINT" != "" ]]; then
-            echo "${node}      ${CPU_count}      ${RAM_count}";
+            echo "${node}      ${CPU_count} CPU(s)     $(( ${RAM_count} / 1024 )) MB";
         fi
         if [[ ${CPU_count} -gt 3 && ${RAM_count} -gt 15000000 ]]; then
             AOC_Server=${node}
@@ -55,11 +55,9 @@ checkns(){
 }
 
 installAOCServer(){
-	
 	cp -f aoc-server-deployment.yaml.tpl aoc-server-deployment.yaml;
-	
 
-    sed -i "s|#AOC_SERVER#|${AOC_Server}|g" aoc-server-deployment.yaml
+    sed -i '.orig' "s/#AOC_SERVER#/${AOC_Server}/g" aoc-server-deployment.yaml
     # Delete deployment if it exists already
     kubectl get deployment netsil --namespace netsil > /dev/null 2>&1 && kubectl delete deployment netsil --namespace netsil
     
@@ -146,23 +144,23 @@ main(){
 	clear;
     echo "=========== Cluster Information =================";
     kubectl cluster-info
-    echo "PRE-REQ : AOC server needs min 4 CPU and 15GB RAM.";
-    echo "PRE-REQ : Your cluster needs at least one node matching above requirements";
-    echo "PRE-REQ : ALL nodes need internet connectivity to pull images from Docker Hub"
-    echo "PROMPT : Please confirm that you want to install AOC on above cluster (yes/no)[no]:";
+    echo "=================================================";
+    echo "PRE-REQS : "
+    echo "AOC server needs at least one node with min 4 CPU and 15GB RAM";
+    echo "ALL nodes need internet connectivity to pull images from Docker Hub"
+    echo "PROMPT : Please confirm that you want to install AOC on above cluster (y/n)[y]:";
     read choice;
-    if [[ "${choice}" != "yes" ]]; then
+    if [[ "${choice}" != "y" ]] && [[ "${choice}" != "" ]] ; then
          exit 1;
     fi
     
     #
     # Handling Service type by prompting user
     #
-    echo "=============================================================";
     echo "INFO : This automation does not support ingress controller.";
-    echo "PROMPT : Default Service type is NodePort. Type yes if you want a LoadBalancer instead (yes/no)[no]:";
+    echo "PROMPT : Default Service type is NodePort. Type yes if you want a LoadBalancer instead (y/n)[n]:";
     read choice;
-    if [[ "${choice}" == "yes" ]]; then
+    if [[ "${choice}" == "y" ]]; then
         SERVICE_TYPE=LoadBalancer
     else
         SERVICE_TYPE=NodePort
@@ -173,6 +171,7 @@ main(){
     checkCPURAM
     if [[ "${AOC_Server}" == "" ]]; then
         echo "ERROR: Could not find a node which has at least 4 CPU and 15GB RAM. Below are Nodes with their CPU and RAM values:";
+        echo ""
         checkCPURAM print
         exit 1
     fi
