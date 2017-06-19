@@ -16,5 +16,5 @@ docker run -td \
     -p 2003:2003 \
     -p 2003:2003/udp \
     --log-driver=none \
-    netsil/netsil:stable-1.4.4 \
+    netsil/netsil:stable-1.4.5 \
     /root/startup.sh
