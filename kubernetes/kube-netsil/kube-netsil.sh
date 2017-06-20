@@ -77,7 +77,7 @@ spec:
     spec:
       containers:
       - name: netsil
-        image: netsil/netsil:stable-1.4.4
+        image: netsil/netsil:stable-1.4.5
         command:
         - /root/startup.sh
         ports:
@@ -245,7 +245,7 @@ spec:
       hostNetwork: true
       containers:
       - name: collector
-        image: netsil/collectors:stable-1.3.1
+        image: netsil/collectors:stable-1.4.5
         command: ["/bin/bash","-c","while true ; do NETSIL_SP_HOST=\$NETSIL_SERVICE_HOST /opt/netsil/collectors/start.sh ; echo Exiting, possibly to upgrade ; sleep 5 ; done"]
         securityContext:
           capabilities:
