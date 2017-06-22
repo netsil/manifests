@@ -261,6 +261,10 @@ spec:
           value: 'docker'
         - name: SAMPLINGRATE
           value: '100'
+        - name: KUBERNETES
+          value: "yes"
+        - name: SD_BACKEND
+          value: docker
         volumeMounts:
         - name: cgroup
           mountPath: /host/sys/fs/cgroup/
