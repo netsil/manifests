@@ -4,7 +4,7 @@
          "type": "DOCKER",
          "docker": {
              "network": "HOST",
-             "image": "netsil/collectors:stable-1.4.5",
+             "image": "netsil/collectors:stable-1.5.0",
              "parameters": [
                { "key": "cap-add", "value": "NET_RAW" },
                { "key": "cap-add", "value": "NET_ADMIN" }

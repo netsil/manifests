@@ -13,6 +13,8 @@ spec:
     - name: https
       port: 443
       nodePort: 443
+    - name: port2000
+      port: 2000
     - name: port2001
       port: 2001
     - name: port2003
