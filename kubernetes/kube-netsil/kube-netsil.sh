@@ -256,10 +256,6 @@ spec:
             - NET_RAW
             - NET_ADMIN
         env:
-        - name: NETSIL_TRAFFIC_PORT
-          value: '2003'
-        - name: NETSIL_INFRA_PORT
-          value: '2001'
         - name: DEPLOY_ENV
           value: 'docker'
         - name: SAMPLINGRATE

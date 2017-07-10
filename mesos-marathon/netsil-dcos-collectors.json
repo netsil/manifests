@@ -34,8 +34,6 @@
      "acceptedResourceRoles": ["*", "slave_public"],
      "env": {
        "NETSIL_SP_HOST": "netsil.marathon.mesos",
-       "NETSIL_TRAFFIC_PORT": "2003",
-       "NETSIL_INFRA_PORT": "2001",
        "DEPLOY_ENV": "docker"
      },
      "constraints": [
