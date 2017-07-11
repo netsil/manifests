@@ -256,6 +256,14 @@
                     },
                     {
                         "IpProtocol": "tcp",
+                        "FromPort": "2000",
+                        "ToPort": "2000",
+                        "CidrIp": {
+                            "Ref": "AdminLocation"
+                        }
+                    },
+                    {
+                        "IpProtocol": "tcp",
                         "FromPort": "22",
                         "ToPort": "22",
                         "CidrIp": {
