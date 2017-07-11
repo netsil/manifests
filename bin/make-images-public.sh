@@ -15,7 +15,6 @@ do
     aws --region ${i} ec2 modify-image-attribute \
         --image-id ${IMAGE_IDS[$i]} \
         --launch-permission "{\"Add\":[{\"Group\":\"all\"}]}"
-    echo "Made ${IMAGE_IDS[$i]} public"
 done
 
 
