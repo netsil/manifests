@@ -31,6 +31,7 @@ update_version() {
 
 update_tag() {
     git tag -d latest
+    git tag -d "${NEXT_VERSION}"
     git tag -a "latest" -m "Release ${NEXT_VERSION}"
     git tag -a "${NEXT_VERSION}" -m "Release ${NEXT_VERSION}"
     git push origin --tags -f
