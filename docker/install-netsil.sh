@@ -12,10 +12,9 @@ docker run -td \
     -v /opt/netsil/lite/zookeeper/data:/opt/netsil/zookeeper/data \
     -p 80:80 \
     -p 443:443 \
-    -p 2000:2000 \
     -p 2001:2001 \
     -p 2003:2003 \
     -p 2003:2003/udp \
     --log-driver=none \
-    netsil/netsil:stable-1.5.0 \
+    netsil/netsil:stable-1.4.5 \
     /root/startup.sh

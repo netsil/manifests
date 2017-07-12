@@ -16,7 +16,7 @@ spec:
       hostNetwork: true
       containers:
       - name: collector
-        image: netsil/collectors:stable-1.5.0
+        image: netsil/collectors:stable-1.4.5
         command: ["/bin/bash","-c","while true ; do NETSIL_SP_HOST=$NETSIL_SERVICE_HOST /opt/netsil/collectors/start.sh ; echo Exiting, possibly to upgrade ; sleep 5 ; done"]
         securityContext:
           capabilities:
@@ -26,6 +26,10 @@ spec:
         env:
         #- name: NETSIL_SERVICE_HOST
         #  value: '<AOC address here>'
+        - name: NETSIL_TRAFFIC_PORT
+          value: '2003'
+        - name: NETSIL_INFRA_PORT
+          value: '2001'
         - name: DEPLOY_ENV
           value: 'docker'
         - name: KUBERNETES
