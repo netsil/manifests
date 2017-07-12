@@ -77,13 +77,12 @@ spec:
     spec:
       containers:
       - name: netsil
-        image: netsil/netsil:stable-1.5.0
+        image: netsil/netsil:stable-1.4.5
         command:
         - /root/startup.sh
         ports:
         - containerPort: 80
         - containerPort: 443
-        - containerPort: 2000
         - containerPort: 2001
         - containerPort: 2003
         - containerPort: 2003
@@ -193,8 +192,6 @@ spec:
     - name: https
       port: 443
       nodePort: 31443
-    - name: port2000
-      port: 2000
     - name: port2001
       port: 2001
     - name: port2003
@@ -248,7 +245,7 @@ spec:
       hostNetwork: true
       containers:
       - name: collector
-        image: netsil/collectors:stable-1.5.0
+        image: netsil/collectors:stable-1.4.5
         command: ["/bin/bash","-c","while true ; do NETSIL_SP_HOST=\$NETSIL_SERVICE_HOST /opt/netsil/collectors/start.sh ; echo Exiting, possibly to upgrade ; sleep 5 ; done"]
         securityContext:
           capabilities:
@@ -256,6 +253,10 @@ spec:
             - NET_RAW
             - NET_ADMIN
         env:
+        - name: NETSIL_TRAFFIC_PORT
+          value: '2003'
+        - name: NETSIL_INFRA_PORT
+          value: '2001'
         - name: DEPLOY_ENV
           value: 'docker'
         - name: SAMPLINGRATE

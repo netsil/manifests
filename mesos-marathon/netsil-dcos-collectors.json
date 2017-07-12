@@ -4,7 +4,7 @@
          "type": "DOCKER",
          "docker": {
              "network": "HOST",
-             "image": "netsil/collectors:stable-1.5.0",
+             "image": "netsil/collectors:stable-1.4.5",
              "parameters": [
                { "key": "cap-add", "value": "NET_RAW" },
                { "key": "cap-add", "value": "NET_ADMIN" }
@@ -34,6 +34,8 @@
      "acceptedResourceRoles": ["*", "slave_public"],
      "env": {
        "NETSIL_SP_HOST": "netsil.marathon.mesos",
+       "NETSIL_TRAFFIC_PORT": "2003",
+       "NETSIL_INFRA_PORT": "2001",
        "DEPLOY_ENV": "docker"
      },
      "constraints": [
