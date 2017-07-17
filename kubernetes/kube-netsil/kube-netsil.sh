@@ -326,7 +326,7 @@ displayInfo(){
 	else
 	    node_ips=$(kubectl get nodes --output=jsonpath={.items..status.addresses[1].address})
 	    echo "INFO : Node IPs ${node_ips}";
-	    echo "INFO : AOC server is avaialble on Port 31000 of above IPs";
+	    echo "INFO : AOC server is avaialble on Port 31000 [HTTP] and Port 30443 [HTTPS] of above IPs";
 	    echo "INFO : Please ensure this port is open in firewall";
 	fi
 
