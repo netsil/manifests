@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 
 # TODO: Generate this list from the copy-images script output in the future
 declare -A IMAGE_IDS

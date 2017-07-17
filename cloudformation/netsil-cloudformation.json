@@ -35,7 +35,7 @@
             "Description": "You may want to choose <false> if you intend to access Netsil AOC behind a load balancer.",
             "AllowedValues": ["true", "false"],
             "Default": "true",
-            "Type": "String",
+            "Type": "String"
         },
         "VPC": {
             "Description": "You must launch Netsil AOC in the same VPC as that of the applications you wish to monitor, or setup VPC peering when using a separate VPC.",
@@ -98,34 +98,34 @@
         },
         "AWSRegionArch2AMI": {
             "us-east-1": {
-                "HVM64": "ami-daeac5cc"
+                "HVM64": "ami-ce4b5ed8"
             },
             "us-east-2": {
-                "HVM64": "ami-8f90b6ea"
+                "HVM64": "ami-3a84a55f"
             },
             "us-west-1": {
-                "HVM64": "ami-2bcce14b"
+                "HVM64": "ami-e6a68886"
             },
             "us-west-2": {
-                "HVM64": "ami-27a2a85e"
+                "HVM64": "ami-d39887aa"
             },
             "eu-west-1": {
-                "HVM64": "ami-9f7b63f9"
+                "HVM64": "ami-d6c62aaf"
             },
             "eu-central-1": {
-                "HVM64": "ami-be40e7d1"
+                "HVM64": "ami-989a38f7"
             },
             "ap-southeast-1": {
-                "HVM64": "ami-e10d8082"
+                "HVM64": "ami-bc188edf"
             },
             "ap-northeast-1": {
-                "HVM64": "ami-1c4c597b"
+                "HVM64": "ami-1da2467b"
             },
             "ap-south-1": {
-                "HVM64": "ami-1be59a74"
+                "HVM64": "ami-35e59c5a"
             },
             "sa-east-1": {
-                "HVM64": "ami-b6a7ccda"
+                "HVM64": "ami-dc592db0"
             }
         }
     },
