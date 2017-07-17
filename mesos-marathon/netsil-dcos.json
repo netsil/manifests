@@ -132,12 +132,17 @@
       }
     ],
     "docker": {
-      "image": "netsil/netsil:stable-1.4.5",
+      "image": "netsil/netsil:stable-1.5.1",
       "network": "BRIDGE",
       "portMappings": [
         {
           "containerPort": 80,
           "hostPort": 30443,
+          "protocol": "tcp"
+        },
+        {
+          "containerPort": 2000,
+          "hostPort": 2000,
           "protocol": "tcp"
         },
         {

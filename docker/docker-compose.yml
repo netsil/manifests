@@ -1,7 +1,7 @@
 version: '2'
 services:
   netsil:
-    image: netsil/netsil:stable-1.4.5
+    image: netsil/netsil:stable-1.5.1
     restart: unless-stopped
     command: ["/root/startup.sh"]
     volumes:
@@ -20,6 +20,7 @@ services:
     ports:
       - '80:80'
       - '443:443'
+      - '2000:2000'
       - '2001:2001'
       - '2003:2003'
       - '2003:2003/udp'
