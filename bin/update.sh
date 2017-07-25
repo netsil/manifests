@@ -15,6 +15,7 @@ update_version() {
     manifests=(
         ./docker/docker-compose.yml
         ./docker/install-netsil.sh
+        ./docker/install-collectors.sh
         ./kubernetes/collector.yaml
         ./kubernetes/netsil-rc.yaml
         ./kubernetes/netsil.yml
