@@ -246,6 +246,7 @@ spec:
         component: collector
     spec:
       hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       containers:
       - name: collector
         image: netsil/collectors:stable-1.5.2
