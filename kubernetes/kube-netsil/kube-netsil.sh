@@ -192,7 +192,7 @@ spec:
       nodePort: 31000
     - name: https
       port: 443
-      nodePort: 31443
+      nodePort: 30443
     - name: port2000
       port: 2000
     - name: port2001
