@@ -29,7 +29,7 @@
          ]
      },
      "cpus": 0.2,
-     "mem": 256,
+     "mem": 512,
      "instances": 1,
      "acceptedResourceRoles": ["*", "slave_public"],
      "env": {
