@@ -111,7 +111,7 @@ spec:
       port: 80
     - name: https
       port: 443
-      nodePort: 443
+      nodePort: 30443
     - name: port2000
       port: 2000
     - name: port2001
