@@ -10,8 +10,34 @@ set -e
 # 2. kubectl should point to the cluster
 #
 
+cleanup(){
+	clear;
+    
+    echo "=========== Cluster Information =================";
+    kubectl cluster-info
+    echo "PROMPT: Are you sure you want to remove AOC installation from this cluster [y/n][n]:"
+    read choice;
+    if [[ "${choice}" == "y" ]]; then
+	    kubectl delete daemonset collector -n netsil
+	    kubectl delete svc netsil -n netsil
+	    kubectl delete deploy netsil -n netsil
+	    kubectl delete ns netsil
+	exit 0;
+	fi
+}
+
 getNodeList(){
     NodeList=$(kubectl get nodes --output=jsonpath={.items..metadata.name})
+}
+
+checkdnsPolicy(){
+	KUBE_SERVER_VERSION=$(kubectl version | grep Server | awk -F "," '{print $2}' | cut -d":" -f2 | tr -cd '[:alnum:]')
+	if [[ ${KUBE_SERVER_VERSION} -lt 6 ]]; then
+	    echo 'Warning: Unable to set dnsPolicy to ClusterFirstWithHostNet because your kubernetes server version is too low. Certain service integrations may be unavailable in the AOC because of this. As a workaround, you may redeploy your collectors with the variables OVERWRITE_RESOLVCONF="yes" and K8S_NAMESERVER="<address-of-kube-dns-service>"'
+	    dnsPolicy='Default'
+	else
+	    dnsPolicy='ClusterFirstWithHostNet'
+	fi
 }
 
 checkCPURAM(){
@@ -239,11 +265,17 @@ metadata:
     app: netsil
     component: collector
 spec:
+EOF
+if [[ "${dnsPolicy}" == "ClusterFirstWithHostNet" ]]; then
+cat <<EOF>>aoc-collectors-daemonset.yaml
   minReadySeconds: 0
   updateStrategy:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
+EOF
+fi
+cat <<EOF>>aoc-collectors-daemonset.yaml
   template:
     metadata:
       labels:
@@ -251,7 +283,7 @@ spec:
         component: collector
     spec:
       hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
+      dnsPolicy: ${dnsPolicy}
       containers:
       - name: collector
         image: netsil/collectors:stable-1.5.2
@@ -342,6 +374,7 @@ displayInfo(){
 
 main(){
     clear;
+    
     echo "=========== Cluster Information =================";
     kubectl cluster-info
     echo "PRE-REQS :";
@@ -376,10 +409,14 @@ main(){
     fi
     checkns
     installAOCServer
+    checkdnsPolicy
     installAOCCollectors
     displayInfo
 }
 
+if [[ "$1" == "delete" ]]; then
+    cleanup
+fi
 main
 
 
