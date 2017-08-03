@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -e
 
 #
@@ -33,9 +32,10 @@ getNodeList(){
 checkdnsPolicy(){
 	KUBE_SERVER_VERSION=$(kubectl version | grep Server | awk -F "," '{print $2}' | cut -d":" -f2 | tr -cd '[:alnum:]')
 	if [[ ${KUBE_SERVER_VERSION} -lt 6 ]]; then
-	    echo 'Warning: Unable to set dnsPolicy to ClusterFirstWithHostNet because your kubernetes server version is too low. Certain service integrations may be unavailable in the AOC because of this. As a workaround, you may redeploy your collectors with the variables OVERWRITE_RESOLVCONF="yes" and K8S_NAMESERVER="<address-of-kube-dns-service>"'
+        DISPLAY_VERSION_WARNING="1"
 	    dnsPolicy='Default'
 	else
+        DISPLAY_VERSION_WARNING="0"
 	    dnsPolicy='ClusterFirstWithHostNet'
 	fi
 }
@@ -356,6 +356,15 @@ displayInfo(){
 	     done
 	     
 	fi
+
+    if [[ "${DISPLAY_VERSION_WARNING}" == "1" ]] ; then
+        echo "==========================================================================";
+        echo 'Warning: Unable to set dnsPolicy to ClusterFirstWithHostNet because your kubernetes server version is too low.'
+        echo 'Certain service integrations may be unavailable in the AOC because of this.'
+        echo 'As a workaround, you may redeploy your collectors with the variables: '
+        echo 'OVERWRITE_RESOLVCONF="yes" and K8S_NAMESERVER="<address-of-kube-dns-service>"'
+    fi
+
 	
 	echo "==========================================================================";
 	echo "Netsil AOC and collectors are installed now.";
