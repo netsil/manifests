@@ -26,7 +26,7 @@ update_version() {
 
     for i in "${manifests[@]}"
     do
-        sed -i '' -e "s/stable-${PREVIOUS_VERSION}/stable-${NEXT_VERSION}/g" $i
+        sed -i.bak "s/stable-${PREVIOUS_VERSION}/stable-${NEXT_VERSION}/g" $i
     done
 }
 
