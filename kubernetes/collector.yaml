@@ -22,7 +22,7 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
       - name: collector
-        image: netsil/collectors:stable-1.5.3
+        image: netsil/collectors:stable-1.5.4
         command: ["/bin/bash","-c","while true ; do NETSIL_SP_HOST=$NETSIL_SERVICE_HOST /opt/netsil/collectors/start.sh ; echo Exiting, possibly to upgrade ; sleep 5 ; done"]
         securityContext:
           capabilities:
