@@ -25,8 +25,8 @@ spec:
             - NET_RAW
             - NET_ADMIN
         env:
-        - name: NETSIL_SERVICE_HOST
-          value: 'dev-vm-sigma.netsil.io'
+        #- name: NETSIL_SERVICE_HOST
+        #  value: '<AOC address here>'
         - name: DEPLOY_ENV
           value: 'docker'
         - name: KUBERNETES
