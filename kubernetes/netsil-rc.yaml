@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: netsil
-        image: netsil/netsil:stable-1.5.4
+        image: netsil/netsil:stable-1.6.0
         command:
         - /root/startup.sh
         ports:
