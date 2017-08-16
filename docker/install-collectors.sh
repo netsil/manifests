@@ -10,4 +10,4 @@ docker run -td \
        --ulimit core=0 \
        -e DEPLOY_ENV="docker" \
        -e NETSIL_SP_HOST=${NETSIL_HOST} \
-       netsil/collectors:stable-1.5.4
+       netsil/collectors:stable-1.6.1
