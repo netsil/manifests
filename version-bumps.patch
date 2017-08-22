@@ -1,0 +1,144 @@
+diff --git a/docker/docker-compose.yml b/docker/docker-compose.yml
+index 7ec4e01..37b6d2d 100644
+--- a/docker/docker-compose.yml
++++ b/docker/docker-compose.yml
+@@ -1,7 +1,7 @@
+ version: '2'
+ services:
+   netsil:
+-    image: netsil/netsil:stable-1.6.1
++    image: netsil/netsil:stable-1.6.2
+     restart: unless-stopped
+     command: ["/root/startup.sh"]
+     volumes:
+diff --git a/docker/install-collectors.sh b/docker/install-collectors.sh
+index 3ebcc18..05305b1 100755
+--- a/docker/install-collectors.sh
++++ b/docker/install-collectors.sh
+@@ -9,5 +9,6 @@ docker run -td \
+        --cap-add=NET_ADMIN \
+        --ulimit core=0 \
+        -e DEPLOY_ENV="docker" \
+        -e NETSIL_SP_HOST=${NETSIL_HOST} \
+-       netsil/collectors:stable-1.6.1
++       netsil/collectors:stable-1.6.2
+diff --git a/docker/install-netsil.sh b/docker/install-netsil.sh
+index cb22fac..9a799df 100755
+--- a/docker/install-netsil.sh
++++ b/docker/install-netsil.sh
+@@ -17,5 +17,5 @@ docker run -td \
+     -p 2003:2003 \
+     -p 2003:2003/udp \
+     --log-driver=none \
+-    netsil/netsil:stable-1.6.1 \
++    netsil/netsil:stable-1.6.2 \
+     /root/startup.sh
+diff --git a/kubernetes/1.5/collector.yaml b/kubernetes/1.5/collector.yaml
+index cc08761..3c19f53 100644
+--- a/kubernetes/1.5/collector.yaml
++++ b/kubernetes/1.5/collector.yaml
+@@ -17,7 +17,7 @@ spec:
+       dnsPolicy: Default
+       containers:
+       - name: collector
+-        image: netsil/collectors:stable-1.6.1
++        image: netsil/collectors:stable-1.6.2
+         command: ["/bin/bash","-c","while true ; do NETSIL_SP_HOST=$NETSIL_SERVICE_HOST /opt/netsil/collectors/start.sh ; echo Exiting, possibly to upgrade ; sleep 5 ; done"]
+         securityContext:
+           capabilities:
+diff --git a/kubernetes/collector.yaml b/kubernetes/collector.yaml
+index 3bb5b56..333f478 100644
+--- a/kubernetes/collector.yaml
++++ b/kubernetes/collector.yaml
+@@ -22,7 +22,7 @@ spec:
+       dnsPolicy: ClusterFirstWithHostNet
+       containers:
+       - name: collector
+-        image: netsil/collectors:stable-1.6.1
++        image: netsil/collectors:stable-1.6.2
+         command: ["/bin/bash","-c","while true ; do NETSIL_SP_HOST=$NETSIL_SERVICE_HOST /opt/netsil/collectors/start.sh ; echo Exiting, possibly to upgrade ; sleep 5 ; done"]
+         securityContext:
+           capabilities:
+diff --git a/kubernetes/kube-netsil/kube-netsil.sh b/kubernetes/kube-netsil/kube-netsil.sh
+index 3d9707f..4af6219 100755
+--- a/kubernetes/kube-netsil/kube-netsil.sh
++++ b/kubernetes/kube-netsil/kube-netsil.sh
+@@ -103,7 +103,7 @@ spec:
+     spec:
+       containers:
+       - name: netsil
+-        image: netsil/netsil:stable-1.6.1
++        image: netsil/netsil:stable-1.6.2
+         command:
+         - /root/startup.sh
+         ports:
+@@ -286,7 +286,7 @@ cat <<EOF>>aoc-collectors-daemonset.yaml
+       dnsPolicy: ${dnsPolicy}
+       containers:
+       - name: collector
+-        image: netsil/collectors:stable-1.6.1
++        image: netsil/collectors:stable-1.6.2
+         command: ["/bin/bash","-c","while true ; do NETSIL_SP_HOST=\$NETSIL_SERVICE_HOST /opt/netsil/collectors/start.sh ; echo Exiting, possibly to upgrade ; sleep 5 ; done"]
+         securityContext:
+           capabilities:
+diff --git a/kubernetes/netsil-rc.yaml b/kubernetes/netsil-rc.yaml
+index 1a56eac..683ae14 100644
+--- a/kubernetes/netsil-rc.yaml
++++ b/kubernetes/netsil-rc.yaml
+@@ -18,7 +18,7 @@ spec:
+     spec:
+       containers:
+       - name: netsil
+-        image: netsil/netsil:stable-1.6.1
++        image: netsil/netsil:stable-1.6.2
+         command:
+         - /root/startup.sh
+         ports:
+diff --git a/kubernetes/netsil.yml b/kubernetes/netsil.yml
+index a848f7f..fa090ce 100644
+--- a/kubernetes/netsil.yml
++++ b/kubernetes/netsil.yml
+@@ -23,7 +23,7 @@ spec:
+     spec:
+       containers:
+       - name: netsil
+-        image: netsil/netsil:stable-1.6.1
++        image: netsil/netsil:stable-1.6.2
+         command:
+         - /root/startup.sh
+         ports:
+@@ -141,7 +141,7 @@ spec:
+       hostNetwork: true
+       containers:
+       - name: collector
+-        image: netsil/collectors:stable-1.6.1
++        image: netsil/collectors:stable-1.6.2
+         command: ["/bin/bash","-c","while true ; do NETSIL_SP_HOST=$NETSIL_SERVICE_HOST /opt/netsil/collectors/start.sh ; echo Exiting, possibly to upgrade ; sleep 5 ; done"]
+         securityContext:
+           capabilities:
+diff --git a/mesos-marathon/netsil-dcos-collectors.json b/mesos-marathon/netsil-dcos-collectors.json
+index a1ff8cd..88de60c 100644
+--- a/mesos-marathon/netsil-dcos-collectors.json
++++ b/mesos-marathon/netsil-dcos-collectors.json
+@@ -4,7 +4,7 @@
+          "type": "DOCKER",
+          "docker": {
+              "network": "HOST",
+-             "image": "netsil/collectors:stable-1.6.1",
++             "image": "netsil/collectors:stable-1.6.2",
+              "parameters": [
+                { "key": "cap-add", "value": "NET_RAW" },
+                { "key": "cap-add", "value": "NET_ADMIN" }
+diff --git a/mesos-marathon/netsil-dcos.json b/mesos-marathon/netsil-dcos.json
+index 3c0edb7..bfb1be5 100644
+--- a/mesos-marathon/netsil-dcos.json
++++ b/mesos-marathon/netsil-dcos.json
+@@ -132,7 +132,7 @@
+       }
+     ],
+     "docker": {
+-      "image": "netsil/netsil:stable-1.6.1",
++      "image": "netsil/netsil:stable-1.6.2",
+       "network": "BRIDGE",
+       "portMappings": [
+         {
