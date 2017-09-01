@@ -1,0 +1,118 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: auto_conf
+  namespace: netsil
+data:
+ apache.yaml: |
+        docker_images:
+          - httpd
+
+        init_config:
+
+        instances:
+          - apache_status_url: http://%%host%%/server-status?auto
+  consul.yaml: |
+        docker_images:
+          - consul
+
+        init_config:
+
+        instances:
+          - url: "http://%%host%%:%%port%%"
+            catalog_checks: yes
+            new_leader_checks: yes
+            # service_whitelist:
+  couch.yaml: |
+        docker_images:
+          - couchdb
+
+        init_config:
+
+        instances:
+          - server: http://%%host%%:%%port%%
+  couchbase.yaml: |
+        docker_images:
+          - couchbase
+
+        init_config:
+
+        instances:
+          - server: http://%%host%%:%%port%%
+            user: Administrator
+            password: password
+  elastic.yaml: |
+        docker_images:
+          - elasticsearch
+
+        init_config:
+
+        instances:
+          - url: "http://%%host%%:%%port_0%%"
+  etcd.yaml: |
+        docker_images:
+          - etcd
+
+        init_config:
+
+        instances:
+          - url: "http://%%host%%:%%port_0%%"
+  kube_dns.yaml: |
+        docker_images:
+          - kubedns-amd64
+          - k8s-dns-kube-dns-amd64
+
+        init_config:
+
+        instances:
+          - prometheus_endpoint: "http://%%host%%:10055/metrics"
+            tags:
+              - "dns-pod:%%host%%"
+  kubernetes_state.yaml: |
+        docker_images:
+          - kube-state-metrics
+
+        init_config:
+
+        instances:
+          # To enable Kube State metrics you must specify the url exposing the API
+          - kube_state_url: http://%%host%%:%%port%%/metrics
+            # Tags are reported as set by kube-state-metrics. If you want to translate
+            # them to other tags, you can use the labels_mapper dictionary
+            # labels_mapper:
+            #   namespace: kube_namespace
+  kyototycoon.yaml: |
+        docker_images:
+          - kyototycoon
+
+        init_config:
+
+        instances:
+          - report_url: http://%%host%%:%%port%%/rpc/report
+  mcache.yaml: |
+        docker_images:
+          - memcached
+
+        init_config:
+
+        instances:
+          - url: "%%host%%"
+            port: "%%port%%"
+  redisdb.yaml: |
+        docker_images:
+          - redis
+
+        init_config:
+
+        instances:
+          - host: "%%host%%"
+            port: "%%port%%"
+  riak.yaml: |
+        root@gke-trafficsim-default-pool-93207d42-47ll:/etc/netsil-dd-agent/conf.d/auto_conf# vim riak
+        docker_images:
+          - riak
+
+        init_config:
+
+        instances:
+          - url: http://%%host%%:%%port%%/stats
