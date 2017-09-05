@@ -18,6 +18,7 @@ update_version() {
         ./docker/install-collectors.sh
         ./kubernetes/collector.yaml
         ./kubernetes/1.5/collector.yaml
+        ./kubernetes/configmaps/collector.yaml
         ./kubernetes/netsil-rc.yaml
         ./kubernetes/netsil.yml
         ./kubernetes/kube-netsil/kube-netsil.sh
