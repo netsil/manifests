@@ -17,7 +17,7 @@ spec:
       dnsPolicy: Default
       containers:
       - name: collector
-        image: netsil/collectors:stable-1.6.2
+        image: netsil/collectors:stable-1.7.0
         command: ["/bin/bash","-c","while true ; do NETSIL_SP_HOST=$NETSIL_SERVICE_HOST /opt/netsil/collectors/start.sh ; echo Exiting, possibly to upgrade ; sleep 5 ; done"]
         securityContext:
           capabilities:
@@ -27,8 +27,10 @@ spec:
         env:
         #- name: NETSIL_SERVICE_HOST
         #  value: '<AOC address here>'
+        #- name: NETSIL_ORGANIZATION_ID
+        #  value: '<Your org id here>'
         - name: DEPLOY_ENV
-          value: 'docker'
+          value: "docker"
         - name: KUBERNETES
           value: "yes"
         - name: SD_BACKEND
@@ -43,10 +45,6 @@ spec:
         - name: docker-sock
           mountPath: /var/run/docker.sock
           readOnly: true
-        - name: configmap-volume
-          mountPath: /etc/netsil-dd-agent/conf.d/
-        - name: configmap-auto-conf
-          mountPath: /etc/netsil-dd-agent/conf.d/auto_conf/
       volumes:
       - name: cgroup
         hostPath:
@@ -57,9 +55,3 @@ spec:
       - name: docker-sock
         hostPath:
           path: /var/run/docker.sock
-      - name: configmap-volume
-        configMap:
-          name: integrations
-      - name: configmap-auto-conf
-        configMap:
-          name: auto_conf
