@@ -108,7 +108,6 @@ data:
           - host: "%%host%%"
             port: "%%port%%"
   riak.yaml: |
-        root@gke-trafficsim-default-pool-93207d42-47ll:/etc/netsil-dd-agent/conf.d/auto_conf# vim riak
         docker_images:
           - riak
 
