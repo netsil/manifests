@@ -103,7 +103,7 @@ spec:
     spec:
       containers:
       - name: netsil
-        image: netsil/netsil:stable-1.7.0
+        image: netsil/netsil:stable-1.7.1
         command:
         - /root/startup.sh
         ports:
@@ -286,7 +286,7 @@ cat <<EOF>>aoc-collectors-daemonset.yaml
       dnsPolicy: ${dnsPolicy}
       containers:
       - name: collector
-        image: netsil/collectors:stable-1.7.0
+        image: netsil/collectors:stable-1.7.1
         command: ["/bin/bash","-c","while true ; do NETSIL_SP_HOST=\$NETSIL_SERVICE_HOST /opt/netsil/collectors/start.sh ; echo Exiting, possibly to upgrade ; sleep 5 ; done"]
         securityContext:
           capabilities:
