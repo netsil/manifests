@@ -1,7 +1,7 @@
 version: '2'
 services:
   netsil:
-    image: netsil/netsil:stable-latest
+    image: netsil/netsil:latest
     restart: unless-stopped
     command: ["/root/startup.sh"]
     volumes:

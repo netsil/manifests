@@ -11,4 +11,4 @@ docker run -td \
        -e DEPLOY_ENV="docker" \
        -e SD_BACKEND="docker" \
        -e NETSIL_SP_HOST=${NETSIL_HOST} \
-       netsil/collectors:stable-latest
+       netsil/collectors:latest
