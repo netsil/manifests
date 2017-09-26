@@ -26,7 +26,9 @@ spec:
             - NET_ADMIN
         env:
         #- name: NETSIL_SERVICE_HOST
-        #  value: '<AOC address here>'
+        #  value: ${your_netsil_ip}
+        #- name: NETSIL_ORGANIZATION_ID
+        #  value: ${organizationId}
         - name: DEPLOY_ENV
           value: 'docker'
         - name: KUBERNETES
