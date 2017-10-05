@@ -50,7 +50,7 @@ spec:
           readOnly: true
         - name: configmap-volume
           mountPath: /etc/netsil-dd-agent/conf.d/
-        - name: configmap-auto_conf
+        - name: configmap-auto-conf
           mountPath: /etc/netsil-dd-agent/auto_conf/
       volumes:
       - name: cgroup
@@ -65,6 +65,6 @@ spec:
       - name: configmap-volume
         configMap:
           name: integrations
-      - name: configmap-auto_conf
+      - name: configmap-auto-conf
         configMap:
-          name: auto_conf
+          name: auto-conf
