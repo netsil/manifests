@@ -1,10 +1,10 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: auto_conf
+  name: auto-conf
   namespace: netsil
 data:
- apache.yaml: |
+  apache.yaml: |
         docker_images:
           - httpd
 
