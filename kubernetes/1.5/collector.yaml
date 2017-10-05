@@ -25,10 +25,11 @@ spec:
             - NET_RAW
             - NET_ADMIN
         env:
-        #- name: NETSIL_SERVICE_HOST
-        #  value: ${your_netsil_ip}
-        #- name: NETSIL_ORGANIZATION_ID
-        #  value: ${organizationId}
+        # Please DO NOT prepend http:// or https:// to the NETSIL_SERVICE_HOST value
+        - name: NETSIL_SERVICE_HOST
+          value: ${your_netsil_ip}
+        - name: NETSIL_ORGANIZATION_ID
+          value: ${organizationId}
         - name: DEPLOY_ENV
           value: 'docker'
         - name: KUBERNETES
@@ -45,10 +46,6 @@ spec:
         - name: docker-sock
           mountPath: /var/run/docker.sock
           readOnly: true
-        - name: configmap-volume
-          mountPath: /etc/netsil-dd-agent/conf.d/
-        - name: configmap-auto-conf
-          mountPath: /etc/netsil-dd-agent/conf.d/auto_conf/
       volumes:
       - name: cgroup
         hostPath:
@@ -59,9 +56,3 @@ spec:
       - name: docker-sock
         hostPath:
           path: /var/run/docker.sock
-      - name: configmap-volume
-        configMap:
-          name: integrations
-      - name: configmap-auto-conf
-        configMap:
-          name: auto_conf

@@ -30,10 +30,11 @@ spec:
             - NET_RAW
             - NET_ADMIN
         env:
-        #- name: NETSIL_SERVICE_HOST
-        #  value: '<AOC address here>'
-        #- name: NETSIL_ORGANIZATION_ID
-        #  value: '<Netsil Organization ID>'
+        # Please DO NOT prepend http:// or https:// to the NETSIL_SERVICE_HOST value
+        - name: NETSIL_SERVICE_HOST
+          value: ${your_netsil_ip}
+        - name: NETSIL_ORGANIZATION_ID
+          value: ${organizationId}
         - name: DEPLOY_ENV
           value: 'docker'
         - name: KUBERNETES
