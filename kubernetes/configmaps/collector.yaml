@@ -53,7 +53,7 @@ spec:
           readOnly: true
         - name: configmap-volume
           mountPath: /etc/netsil-dd-agent/conf.d/
-        - name: configmap-auto_conf
+        - name: configmap-auto-conf
           mountPath: /etc/netsil-dd-agent/auto_conf/
       volumes:
       - name: cgroup
