@@ -36,11 +36,11 @@ spec:
         - name: NETSIL_ORGANIZATION_ID
           value: ${organizationId}
         - name: DEPLOY_ENV
-          value: 'docker'
+          value: "docker"
         - name: KUBERNETES
           value: "yes"
         - name: SD_BACKEND
-          value: docker
+          value: "docker"
         volumeMounts:
         - name: cgroup
           mountPath: /host/sys/fs/cgroup/
@@ -52,9 +52,9 @@ spec:
           mountPath: /var/run/docker.sock
           readOnly: true
         - name: configmap-volume
-          mountPath: /etc/netsil-dd-agent/conf.d/
+          mountPath: /conf.d/
         - name: configmap-auto-conf
-          mountPath: /etc/netsil-dd-agent/auto_conf/
+          mountPath: /etc/netsil-dd-agent/conf.d/auto_conf/
       volumes:
       - name: cgroup
         hostPath:
