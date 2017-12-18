@@ -15,6 +15,7 @@ docker run -td \
     -p 2000:2000 \
     -p 2001:2001 \
     -p 2003:2003 \
+    -p 3003:3003 \
     -p 2003:2003/udp \
     --log-driver=none \
     netsil/netsil:latest \
