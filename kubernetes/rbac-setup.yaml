@@ -16,6 +16,19 @@ rules:
       - "events"
       - "services"
     verbs: ["get", "list"]
+  - apiGroups: [""]
+    resources:
+      - "pods"
+    verbs: ["get", "watch", "list"]
+  - apiGroups: [""]
+    resources:
+      - "configmaps"
+    resourceNames: ["configmap-volume", "configmap-auto-conf"]
+    verbs: ["get", "delete", "update"]
+  - apiGroups: [""]
+    resources:
+      - "configmaps"
+    verbs: ["create"]
 ---
 apiVersion: v1
 kind: ServiceAccount
