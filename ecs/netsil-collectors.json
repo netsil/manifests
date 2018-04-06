@@ -1,0 +1,94 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "netsil",
+            "image": "netsil/collectors:latest",
+            "cpu": 100,
+            "memory": 1024,
+            "essential": true,
+            "linuxParameters": {
+                "capabilities": {
+                    "add": [
+                        "NET_RAW",
+                        "NET_ADMIN"
+                    ]
+                }
+            },
+            "ulimits": [
+                {
+                    "name": "core",
+                    "hardLimit": 0,
+                    "softLimit": 0
+                }
+            ],
+            "mountPoints": null,
+            "environment": [
+                {
+                    "name": "DEPLOY_ENV",
+                    "value": "docker"
+                },
+                {
+                    "name": "NETSIL_ORGANIZATION_ID",
+                    "value": "a4b14045-3e44-4be7-851b-3f7516ec746e"
+                },
+                {
+                    "name": "NETSIL_SP_HOST",
+                    "value": "demo.netsil.io"
+                },
+                {
+                    "name": "SAMPLINGRATE",
+                    "value": "100"
+                },
+                {
+                    "name": "SD_BACKEND",
+                    "value": "docker"
+                }
+            ],
+            "portMappings": [],
+            "volumesFrom": null,
+            "hostname": null,
+            "user": null,
+            "workingDirectory": null,
+            "extraHosts": null,
+            "logConfiguration": null,
+            "dockerLabels": null,
+            "healthCheck": {
+                "command": [
+                    "CMD",
+                    "echo",
+                    "netsil"
+                ],
+                "interval": "300",
+                "timeout": "60",
+                "startPeriod": "300",
+                "retries": "10"
+            }
+        }
+    ],
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "/var/run/docker.sock"
+            },
+            "name": "docker_sock"
+        },
+        {
+            "host": {
+                "sourcePath": "/proc/"
+            },
+            "name": "proc"
+        },
+        {
+            "host": {
+                "sourcePath": "/cgroup/"
+            },
+            "name": "cgroup"
+        }
+    ],
+    "family": "netsil-task",
+    "placementConstraints": [],
+    "memory": null,
+    "cpu": null,
+    "networkMode": "host",
+    "requiresCompatibilities": []
+}
