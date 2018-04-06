@@ -34,7 +34,7 @@
             },
             {
                "name":"NETSIL_ORGANIZATION_ID",
-               "value":"a4b14045-3e44-4be7-851b-3f7516ec746e"
+               "value":${organizationId}
             },
             {
                "name":"SAMPLINGRATE",
@@ -42,7 +42,7 @@
             },
             {
                "name":"NETSIL_SP_HOST",
-               "value":"demo.netsil.io"
+               "value":${your_netsil_ip}
             }
          ],
          "ulimits":[
