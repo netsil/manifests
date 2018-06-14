@@ -33,8 +33,8 @@ spec:
         env:
         #- name: NETSIL_SERVICE_HOST
         #  value: "<AOC address here>"
-        #- name: NETSIL_ORGANIZATION_ID
-        #  value: "<Netsil Organization ID>"
+        #- name: API_KEY
+        #  value: "<Your API key>"
         - name: DEPLOY_ENV
           value: "docker"
         - name: KUBERNETES
