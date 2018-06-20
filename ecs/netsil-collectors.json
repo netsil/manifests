@@ -33,7 +33,7 @@
                "value":"docker"
             },
             {
-               "name":"API_KEY",
+               "name":"NETSIL_API_KEY",
                "value":${your_api_key}
             },
             {

@@ -33,7 +33,7 @@ spec:
         # Please DO NOT prepend http:// or https:// to the NETSIL_SERVICE_HOST value
         - name: NETSIL_SERVICE_HOST
           value: ${your_netsil_ip}
-        - name: API_KEY
+        - name: NETSIL_API_KEY
           value: ${your_api_key}
         - name: DEPLOY_ENV
           value: "docker"
