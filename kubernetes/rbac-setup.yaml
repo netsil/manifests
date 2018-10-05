@@ -2,8 +2,8 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
-  name: netsil
-  namespace: netsil
+  name: epoch
+  namespace: epoch
 rules:
   - nonResourceURLs:
       - "/version"
@@ -33,19 +33,19 @@ rules:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: netsil
-  namespace: netsil
+  name: epoch
+  namespace: epoch
 automountServiceAccountToken: true
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
-  name: netsil
+  name: epoch
 subjects:
   - kind: ServiceAccount
-    name: netsil
-    namespace: netsil
+    name: epoch
+    namespace: epoch
 roleRef:
   kind: ClusterRole
-  name: netsil
+  name: epoch
   apiGroup: rbac.authorization.k8s.io
